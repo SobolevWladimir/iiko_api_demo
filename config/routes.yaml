@@ -3,12 +3,17 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+jwt_auth:
+    path: /auth
+
 app.swagger_ui:
     path: /api/doc
     methods: GET
     defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
 
 app.swagger:
-    path: /api/doc.json
+    path: /doc.json
     methods: GET
     defaults: { _controller: nelmio_api_doc.controller.swagger }
+
