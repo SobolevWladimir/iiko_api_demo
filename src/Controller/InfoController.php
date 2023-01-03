@@ -21,4 +21,24 @@ class InfoController
     {
         return new JsonResponse(['hello']);
     }
+
+     /**
+     * Получить сылку на скачивания iikoOffice
+     *
+     * @Route("/api/office", methods={"GET"})
+     * @OA\Response(
+     *     response=200,
+     *     description="Массив с именами файлов",
+     * )
+     * @OA\Parameter(
+     *     name="host",
+     *     in="query",
+     *     description="host https://arseniy-cloud.iiko.it:443",
+     *     @OA\Schema(type="string")
+     * )
+     */
+    public function office(): JsonResponse
+    {
+        return new JsonResponse(['hello']);
+    }
 }
