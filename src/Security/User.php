@@ -7,14 +7,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    private $login;
+    private string $login;
 
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    private $password;
+    private string $password;
+
+    private string $scheme;
+
+    private string $host;
+
+    private string $port;
+
+    private string $path;
 
     public function getLogin(): ?string
     {
@@ -25,6 +33,52 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->login = $login;
 
+        return $this;
+    }
+
+    public function getScheme(): ?string
+    {
+        return $this->scheme;
+    }
+
+    public function setScheme(string $scheme): self
+    {
+        $this->scheme = $scheme;
+
+        return $this;
+    }
+
+    public function getHost(): ?string
+    {
+        return $this->host;
+    }
+
+    public function setHost(string $host): self
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+
+    public function getPort(): ?string
+    {
+        return $this->port;
+    }
+
+    public function setPort(string $port): self
+    {
+        $this->port = $port;
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $port): self
+    {
+        $this->path = $path;
         return $this;
     }
 
