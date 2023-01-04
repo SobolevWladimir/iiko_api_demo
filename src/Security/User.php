@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->path;
     }
 
-    public function setPath(string $port): self
+    public function setPath(string $path): self
     {
         $this->path = $path;
         return $this;
