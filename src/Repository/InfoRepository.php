@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Security\User;
+use Symfony\Component\HttpClient\Exception\TransportException;
+use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class InfoRepository
@@ -12,6 +14,25 @@ class InfoRepository
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
+    }
+
+    public function checkServerAviable(User $user): bool
+    {
+        $path = "/get_server_info.jsp?encoding=utf-8";
+         $url = $user->getUrl() . $path;
+         $response = $this->client->request(
+             'GET',
+             $url,
+         );
+        try {
+            $statusCode = $response->getStatusCode();
+        } catch (TransportException) {
+            return false;
+        } catch (TimeoutException) {
+            return false;
+        }
+
+        return $statusCode === 200;
     }
 
     public function getServerInfo(User $user)
