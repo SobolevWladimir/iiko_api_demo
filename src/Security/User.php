@@ -16,13 +16,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private string $password;
 
-    private string $scheme;
+    private string $url;
 
-    private string $host;
-
-    private string $port;
-
-    private string $path;
 
     public function getLogin(): ?string
     {
@@ -32,55 +27,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
-
         return $this;
     }
 
-    public function getScheme(): ?string
+    public function getUrl(): ?string
     {
-        return $this->scheme;
+        return $this->url;
     }
 
-    public function setScheme(string $scheme): self
+    public function setUrl(string $url): self
     {
-        $this->scheme = $scheme;
-
+        $this->url = $url;
         return $this;
     }
 
-    public function getHost(): ?string
-    {
-        return $this->host;
-    }
-
-    public function setHost(string $host): self
-    {
-        $this->host = $host;
-
-        return $this;
-    }
-
-    public function getPort(): ?string
-    {
-        return $this->port;
-    }
-
-    public function setPort(string $port): self
-    {
-        $this->port = $port;
-        return $this;
-    }
-
-    public function getPath(): ?string
-    {
-        return $this->path;
-    }
-
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
