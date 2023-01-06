@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Security\User;
+use Exception;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -35,7 +36,7 @@ class InfoRepository
         return $statusCode === 200;
     }
 
-    public function getServerInfo(User $user)
+    public function getServerInfo(User $user): string
     {
         $path = "/get_server_info.jsp?encoding=utf-8";
         $url = $user->getUrl() . $path;
@@ -45,11 +46,10 @@ class InfoRepository
         );
 
         $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
+        if ($statusCode != 200) {
+            throw new Exception($response->getContent());
+        }
         $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
         return $content;
     }
 }
