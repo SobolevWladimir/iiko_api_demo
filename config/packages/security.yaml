@@ -6,8 +6,9 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            id: App\Security\UserProvider
+         jwt:
+            lexik_jwt:
+                class: App\Security\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -27,12 +28,13 @@ security:
 
         api:
             pattern:   ^/api
+            provider: jwt
             stateless: true
             jwt: ~ 
 
         main:
             lazy: true
-            provider: app_user_provider
+            provider: jwt
 
 
     # Easy way to control access for large sections of your site

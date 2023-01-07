@@ -2,10 +2,9 @@
 
 namespace App\Security;
 
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements JWTUserInterface
 {
     private string $login;
 
@@ -117,5 +116,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClientId(string $clientId): void
     {
         $this->clientId = $clientId;
+    }
+
+    public static function createFromPayload($username, array $payload)
+    {
+        $user  = new User();
+        $user->setLogin($username);
+        $user->setUrl($payload['url']);
+        $user->setPassword($payload['password']);
+        $user->setClientId($payload['clientId']);
+        $user->setVersion($payload['version']);
+        return $user;
     }
 }
