@@ -128,4 +128,20 @@ class User implements JWTUserInterface
         $user->setVersion($payload['version']);
         return $user;
     }
+
+    public function getIikoHeaders(): array
+    {
+        $result  = [
+            'Content-Type' => 'text/plain',
+            'X-Resto-CorrelationId' => $this->getClientId(),
+            'X-Resto-LoginName' => $this->getLogin(),
+            'X-Resto-PasswordHash' => $this->getPassword(), //hash printf "resto#test" | sha1sum
+            'X-Resto-BackVersion' => $this->getVersion(),
+            'X-Resto-AuthType' => 'BACK',
+            'X-Resto-ServerEdition' => 'IIKO_RMS',
+            'Accept-Language' => 'ru'
+
+        ];
+        return $result;
+    }
 }
