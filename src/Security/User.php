@@ -18,6 +18,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private string $url;
 
+    private string $version;
+
+    private string $clientId;
+
 
     public function getLogin(): ?string
     {
@@ -93,5 +97,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getVersion(): string
+    {
+        return $this->version;
+    }
+
+    public function setVersion(string $version): void
+    {
+        $this->version = $version;
+    }
+
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(string $clientId): void
+    {
+        $this->clientId = $clientId;
     }
 }

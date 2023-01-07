@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Security\User;
 use App\Repository\InfoRepository;
+use OpenApi\Annotations as OA;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use App\Security\User;
 use Symfony\Component\HttpFoundation\Response;
-use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiLoginController extends AbstractController
 {
@@ -34,12 +35,15 @@ class ApiLoginController extends AbstractController
         $user = new User();
         $user->setLogin($data['login']);
         $user->setUrl($data['url']);
-        $user->setPassword($data['password']);
+        $user->setPassword(sha1($data['password']));
+        $user->setClientId($data['clientId']);
 
         if (!$repository->checkServerAviable($user)) {
             return new Response('The server is not available', Response::HTTP_BAD_REQUEST);
         }
-        ///$message = $request->query->get('get');
-        return new Response('you token');
+        $serverInfo  = $repository->getServerInfo($user);
+        $user->setVersion($serverInfo->getVersion());
+        $fingerPrints = $repository->getFingerPrints($user);
+        return new Response($fingerPrints);
     }
 }
