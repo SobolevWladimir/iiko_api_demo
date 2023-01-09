@@ -19,9 +19,6 @@ class User implements JWTUserInterface
 
     private string $version;
 
-    private string $clientId;
-
-
     public function getLogin(): ?string
     {
         return $this->login;
@@ -108,15 +105,6 @@ class User implements JWTUserInterface
         $this->version = $version;
     }
 
-    public function getClientId(): string
-    {
-        return $this->clientId;
-    }
-
-    public function setClientId(string $clientId): void
-    {
-        $this->clientId = $clientId;
-    }
 
     public static function createFromPayload($username, array $payload)
     {
@@ -124,16 +112,15 @@ class User implements JWTUserInterface
         $user->setLogin($username);
         $user->setUrl($payload['url']);
         $user->setPassword($payload['password']);
-        $user->setClientId($payload['clientId']);
         $user->setVersion($payload['version']);
         return $user;
     }
 
-    public function getIikoHeaders(): array
+    public function getIikoHeaders($clientId): array
     {
         $result  = [
             'Content-Type' => 'text/plain',
-            'X-Resto-CorrelationId' => $this->getClientId(),
+            'X-Resto-CorrelationId' => $clientId,
             'X-Resto-LoginName' => $this->getLogin(),
             'X-Resto-PasswordHash' => $this->getPassword(), //hash printf "resto#test" | sha1sum
             'X-Resto-BackVersion' => $this->getVersion(),
