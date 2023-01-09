@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Security\User;
 use App\Repository\InfoRepository;
+use App\Entity\IikoResponse;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationSuccessResponse;
 use OpenApi\Annotations as OA;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -45,11 +46,13 @@ class ApiLoginController extends AbstractController
         }
         $serverInfo  = $repository->getServerInfo($user);
         $user->setVersion($serverInfo->getVersion());
-        try {
-            $repository->getFingerPrints($user);
-        } catch (\Exception) {
-            return new Response('Ошибка авторзиции', Response::HTTP_BAD_GATEWAY);
-        }
+        $fingerPrint = null;
+        //try {
+            $fingerPrint = $repository->getFingerPrints($user);
+        // } catch (\Exception) {
+        //     return new Response('Ошибка авторзиции', Response::HTTP_BAD_GATEWAY);
+        // }
+        return new JsonResponse($fingerPrint);
         $payload = [
             'url'       => $user->getUrl(),
             'password'  => $user->getPassword(),

@@ -8,6 +8,7 @@ use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Entity\ServerInfo;
+use App\Entity\IikoResponse;
 
 class InfoRepository
 {
@@ -53,7 +54,7 @@ class InfoRepository
         return ServerInfo::fromXml($response->getContent());
     }
 
-    public function getFingerPrints(User $user): string
+    public function getFingerPrints(User $user): IikoResponse
     {
         $path = "/services/authorization?methodName=getCurrentFingerPrints";
         $url = $user->getUrl() . $path;
@@ -89,6 +90,6 @@ class InfoRepository
         if ($statusCode != 200) {
             throw new Exception($response->getContent(), $statusCode);
         }
-        return  $response->getContent();
+        return IikoResponse::fromXml($response->getContent());
     }
 }
