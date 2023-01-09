@@ -19,6 +19,10 @@ class User implements JWTUserInterface
 
     private string $version;
 
+    private string $stateHash;
+
+    private string $licenseHash;
+
     public function getLogin(): ?string
     {
         return $this->login;
@@ -113,6 +117,8 @@ class User implements JWTUserInterface
         $user->setUrl($payload['url']);
         $user->setPassword($payload['password']);
         $user->setVersion($payload['version']);
+        $user->setStateHash($payload['state-hash']);
+        $user->setLicenseHash($payload['license-hash']);
         return $user;
     }
 
@@ -130,5 +136,25 @@ class User implements JWTUserInterface
 
         ];
         return $result;
+    }
+
+    public function getStateHash(): string
+    {
+        return $this->stateHash;
+    }
+
+    public function setStateHash(string $stateHash): void
+    {
+        $this->stateHash = $stateHash;
+    }
+
+    public function getLicenseHash(): string
+    {
+        return $this->licenseHash;
+    }
+
+    public function setLicenseHash(string $licenseHash): void
+    {
+        $this->licenseHash = $licenseHash;
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Repository;
 
+use App\Entity\ServerInfo;
+use App\Entity\IikoResponse;
 use App\Security\User;
 use Exception;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use App\Entity\ServerInfo;
-use App\Entity\IikoResponse;
+use Symfony\Component\Uid\Uuid;
 
 class InfoRepository
 {
@@ -56,13 +57,14 @@ class InfoRepository
 
     public function getFingerPrints(User $user): IikoResponse
     {
+        $uuid  = Uuid::v4();
         $path = "/services/authorization?methodName=getCurrentFingerPrints";
         $url = $user->getUrl() . $path;
         $xmlData  = [
             'entities-version' => -1,
             'client-type' => 'BACK',
             'enable-warnings' => 'false',
-            'client-call-id' => $user->getClientId(),
+            'client-call-id' => $uuid,
             'license-hash' => '0',
             'restrictions-state-hash' => '0',
             'obtained-license-connections-ids' => '',
@@ -76,7 +78,7 @@ class InfoRepository
         $response = $this->client->request('POST', $url, [
           'headers' => [
             'Content-Type' => 'text/plain',
-            'X-Resto-CorrelationId' => $user->getClientId(),
+            'X-Resto-CorrelationId' => $uuid,
             'X-Resto-LoginName' => $user->getLogin(),
             'X-Resto-PasswordHash' => $user->getPassword(), //hash printf "resto#test" | sha1sum
             'X-Resto-BackVersion' => $user->getVersion(),

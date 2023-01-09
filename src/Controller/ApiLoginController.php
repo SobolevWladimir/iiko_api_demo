@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Security\User;
 use App\Repository\InfoRepository;
-use App\Entity\IikoResponse;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationSuccessResponse;
 use OpenApi\Annotations as OA;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -40,24 +39,23 @@ class ApiLoginController extends AbstractController
         $user->setLogin($data['login']);
         $user->setUrl($data['url']);
         $user->setPassword(sha1($data['password']));
-        $user->setClientId($data['clientId']);
         if (!$repository->checkServerAviable($user)) {
             return new Response('The server is not available', Response::HTTP_BAD_REQUEST);
         }
         $serverInfo  = $repository->getServerInfo($user);
         $user->setVersion($serverInfo->getVersion());
         $fingerPrint = null;
-        //try {
+        try {
             $fingerPrint = $repository->getFingerPrints($user);
-        // } catch (\Exception) {
-        //     return new Response('Ошибка авторзиции', Response::HTTP_BAD_GATEWAY);
-        // }
-        return new JsonResponse($fingerPrint);
+        } catch (\Exception) {
+             return new Response('Ошибка авторзиции', Response::HTTP_BAD_GATEWAY);
+        }
         $payload = [
             'url'       => $user->getUrl(),
             'password'  => $user->getPassword(),
-            'clientId'  => $user->getClientId(),
             'version'   => $user->getVersion(),
+            'state-hash' => $fingerPrint->getLicenseInfo()->getStateHash(),
+            'license-hash' => $fingerPrint->getLicenseInfo()->getLicenseHash(),
         ];
         $token  = $JWTManager->createFromPayload($user, $payload);
         return new JWTAuthenticationSuccessResponse($token);
@@ -83,8 +81,9 @@ class ApiLoginController extends AbstractController
         $result = [
           'login' => $user->getLogin(),
           'url' => $user->getUrl(),
-          'clientId' => $user->getClientId(),
           'version' => $user->getVersion(),
+          'license-hash' => $user->getLicenseHash(),
+          'state-hash' => $user->getStateHash(),
         ];
         return new JsonResponse($result);
     }

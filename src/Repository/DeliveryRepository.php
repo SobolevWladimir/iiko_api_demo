@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Security\User;
+use App\Entity\IikoResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class DeliveryRepository
+class DeliveryRepository extends BaseRepository
 {
     private $client;
 
@@ -16,19 +17,19 @@ class DeliveryRepository
 
     public function getTerminals(User $user)
     {
-
-        $path = "/resto/services/deliveryTerminal?methodName=getAllDeliveryTerminals";
+        $clientId = $this->generateNewClientId();
+        $path = "/services/deliveryTerminal?methodName=getAllDeliveryTerminals";
         $url = $user->getUrl() . $path;
-
-        $xmlData  = [
-            'entities-version' => -1,
-            'client-type' => 'BACK',
-            'enable-warnings' => 'false',
-            'client-call-id' => $user->getClientId(), // TODO:  должно обыть равно с  X-Resto-CorrelationId, которая в свою очередь динамически генерируется
-            'license-hash' => '0', //TODO: добавить из fingerPrints
-            'restrictions-state-hash' => '0', // stateHash из fingerPrints
-            'obtained-license-connections-ids' => '', // это какая то хрень // нужна
-            'use-raw-entities' => 'true',
-        ];
+        $body = $this->getRequestBody($user, $clientId);
+        $header  = $this->getRequestHeader($user, $clientId);
+        $response = $this->client->request('POST', $url, [
+          'headers' => $header,
+          'body' => $body->asXML(),
+        ]);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode != 200) {
+            throw new \Exception($response->getContent(), $statusCode);
+        }
+        return IikoResponse::fromXml($response->getContent());
     }
 }
