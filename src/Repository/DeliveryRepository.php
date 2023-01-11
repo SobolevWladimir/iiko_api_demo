@@ -34,4 +34,26 @@ class DeliveryRepository extends BaseRepository
         $res =  IikoResponse::fromXml($response->getContent());
         return DeliveryTerminal::fromIIKOResponse($res);
     }
+
+    public function getDeliveryOrders(User $user)
+    {
+        $clientId = $this->generateNewClientId();
+        $path = "/services/deliveryOrdersLoading?methodName=getAllDeliveryOrdersBrdData";
+        $url = $user->getUrl() . $path;
+        $body = $this->getRequestBody($user, $clientId);
+        $request  = $body->addChild('request');
+        $request->addChild('deliveryTerminalsRevision', '-1');
+        $request->addChild('deliveryTerminalsExchangeStatesRevision', '-1');
+        $header  = $this->getRequestHeader($user, $clientId);
+        $response = $this->client->request('POST', $url, [
+          'headers' => $header,
+          'body' => $body->asXML(),
+        ]);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode != 200) {
+            throw new \Exception($response->getContent(), $statusCode);
+        }
+        $res =  IikoResponse::fromXml($response->getContent());
+        return  $res;
+    }
 }

@@ -32,4 +32,25 @@ class DeliveryController extends AbstractController
         $result = $repository->getTerminals($user);
         return new JsonResponse($result);
     }
+
+     /**
+     * Получить  список доставок
+     *
+     * @Route("/api/delivery/orders", methods={"GET"})
+     * @OA\Response(
+     *     response=200,
+     *     description="Массив с именами файлов",
+     * )
+     * @OA\Parameter(
+     *     name="host",
+     *     in="query",
+     *     description="host https://arseniy-cloud.iiko.it:443",
+     *     @OA\Schema(type="string")
+     * )
+     */
+    public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] ?User $user)
+    {
+        $result = $repository->getDeliveryOrders($user);
+        return new JsonResponse($result);
+    }
 }
