@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Security\User;
 use App\Entity\IikoResponse;
+use App\Entity\DeliveryTerminal;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DeliveryRepository extends BaseRepository
@@ -15,7 +16,7 @@ class DeliveryRepository extends BaseRepository
         $this->client = $client;
     }
 
-    public function getTerminals(User $user)
+    public function getTerminals(User $user): array
     {
         $clientId = $this->generateNewClientId();
         $path = "/services/deliveryTerminal?methodName=getAllDeliveryTerminals";
@@ -30,6 +31,7 @@ class DeliveryRepository extends BaseRepository
         if ($statusCode != 200) {
             throw new \Exception($response->getContent(), $statusCode);
         }
-        return IikoResponse::fromXml($response->getContent());
+        $res =  IikoResponse::fromXml($response->getContent());
+        return DeliveryTerminal::fromIIKOResponse($res);
     }
 }
