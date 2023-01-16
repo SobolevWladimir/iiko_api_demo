@@ -79,7 +79,7 @@ class ApiLoginController extends AbstractController
      * )
      * @Security(name="Bearer")
      */
-    public function getUserInfo(#[CurrentUser] ?User $user)
+    public function getUserInfo(#[CurrentUser] User $user): Response
     {
         $result = [
           'login' => $user->getLogin(),

@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
@@ -29,7 +30,7 @@ class DeliveryController extends AbstractController
      *     )
      * )
      */
-    public function getTerminals(DeliveryRepository $repository, #[CurrentUser] ?User $user)
+    public function getTerminals(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
         $result = $repository->getTerminals($user);
         return new JsonResponse($result);
@@ -44,7 +45,7 @@ class DeliveryController extends AbstractController
      *     description="Массив с именами файлов",
      * )
      */
-    public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] ?User $user)
+    public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
         $result = $repository->getDeliveryOrders($user);
         return new JsonResponse($result);

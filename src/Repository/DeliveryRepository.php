@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Security\User;
@@ -23,7 +25,7 @@ class DeliveryRepository extends BaseRepository
 
     /**
      * @param User $user
-     * @return array
+     * @return DeliveryTerminal[]
      * @throws TransportExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ClientExceptionInterface

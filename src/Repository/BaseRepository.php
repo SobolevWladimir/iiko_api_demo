@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Security\User;
@@ -9,7 +11,7 @@ class BaseRepository
 {
     public function generateNewClientId(): string
     {
-        return Uuid::v4();
+        return (string)Uuid::v4();
     }
 
     public function getRequestBody(User $user, $clientId): \SimpleXMLElement

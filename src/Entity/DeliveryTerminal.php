@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 class DeliveryTerminal implements \JsonSerializable
@@ -29,22 +31,29 @@ class DeliveryTerminal implements \JsonSerializable
     public static function fromXML(\SimpleXMLElement $xml): DeliveryTerminal
     {
         $result = new DeliveryTerminal();
-
         $attributes  = $xml->attributes();
-        $result->setEid($attributes->eid);
-        $result->setRevision($xml->revision);
-        $result->setTerminal($xml->terminal);
+        $eid = '';
+        if ($attributes !== null && $attributes->eid !== null) {
+            $eid = (string)$attributes->eid;
+        }
+        $result->setEid($eid);
+        $result->setRevision($xml->revision !== null ? (string)$xml->revision : '');
+        $result->setTerminal($xml->terminal !== null ? (string)$xml->terminal : '');
         $result->setRegistered($xml->registered == "true");
         $result->setDeleted($xml->deleted == "true");
-        $result->setName($xml->name);
-        $result->setDepartmentEntityId($xml->departmentEntityId);
-        $result->setGroupId($xml->groupId);
+        $result->setName((string)$xml->name);
+        $result->setDepartmentEntityId((string)$xml->departmentEntityId);
+        $result->setGroupId((string)$xml->groupId);
         $result->setTerminalSettings(TerminalSettings::fromXML($xml->terminalSettings));
-        $result->setFullRMSVersion($xml->fullRMSVersion);
-        $result->setProtocolVersion($xml->protocolVersion);
+        $result->setFullRMSVersion((string)$xml->fullRMSVersion);
+        $result->setProtocolVersion((string)$xml->protocolVersion);
         return $result;
     }
 
+    /**
+     * @param IikoResponse $response
+     * @return DeliveryTerminal[]
+     */
     public static function fromIIKOResponse(IikoResponse $response): array
     {
         $result  = [];
