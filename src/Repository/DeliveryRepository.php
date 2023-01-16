@@ -5,6 +5,11 @@ namespace App\Repository;
 use App\Security\User;
 use App\Entity\IikoResponse;
 use App\Entity\DeliveryTerminal;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Exception;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DeliveryRepository extends BaseRepository
@@ -16,6 +21,15 @@ class DeliveryRepository extends BaseRepository
         $this->client = $client;
     }
 
+    /**
+     * @param User $user
+     * @return array
+     * @throws TransportExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws Exception
+     */
     public function getTerminals(User $user): array
     {
         $clientId = $this->generateNewClientId();

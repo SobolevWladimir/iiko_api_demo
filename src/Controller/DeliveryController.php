@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Security\User;
 use App\Repository\DeliveryRepository;
+use App\Entity\DeliveryTerminal;
 use OpenApi\Annotations as OA;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +16,17 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 class DeliveryController extends AbstractController
 {
      /**
-     * Получить сылку на скачивания iikoOffice
+     *  Получить список терминалов
      *
      * @Route("/api/delivery/terminals", methods={"GET"})
      * @OA\Response(
      *     response=200,
-     *     description="Массив с именами файлов",
+     *     description="Получить терминалы доставки",
+     *     @OA\JsonContent(
+     *        description="Возвращает список терминалов доставки",
+     *        type="array",
+     *         @OA\Items(ref=@Model(type=DeliveryTerminal::class))
+     *     )
      * )
      */
     public function getTerminals(DeliveryRepository $repository, #[CurrentUser] ?User $user)
