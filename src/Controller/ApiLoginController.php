@@ -7,6 +7,8 @@ use App\Repository\InfoRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationSuccessResponse;
 use OpenApi\Annotations as OA;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,14 +69,15 @@ class ApiLoginController extends AbstractController
      * @Route("/api/user/info", methods={"GET"})
      * @OA\Response(
      *     response=200,
-     *     description="Токен доступа",
-     *     @OA\Schema(type="string")
+     *     description="Получить информацию о текущем пользователе",
+     *     @Model(type=User::class)
      * )
      * @OA\Response(
      *     response=400,
      *     description="Ошибка",
      *     @OA\Schema(type="string")
      * )
+     * @Security(name="Bearer")
      */
     public function getUserInfo(#[CurrentUser] ?User $user)
     {

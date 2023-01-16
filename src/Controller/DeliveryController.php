@@ -20,12 +20,6 @@ class DeliveryController extends AbstractController
      *     response=200,
      *     description="Массив с именами файлов",
      * )
-     * @OA\Parameter(
-     *     name="host",
-     *     in="query",
-     *     description="host https://arseniy-cloud.iiko.it:443",
-     *     @OA\Schema(type="string")
-     * )
      */
     public function getTerminals(DeliveryRepository $repository, #[CurrentUser] ?User $user)
     {
@@ -40,12 +34,6 @@ class DeliveryController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="Массив с именами файлов",
-     * )
-     * @OA\Parameter(
-     *     name="host",
-     *     in="query",
-     *     description="host https://arseniy-cloud.iiko.it:443",
-     *     @OA\Schema(type="string")
      * )
      */
     public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] ?User $user)

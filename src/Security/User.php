@@ -3,11 +3,14 @@
 namespace App\Security;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use OpenApi\Attributes as OA;
 
 class User implements JWTUserInterface
 {
+    #[OA\Property(type: 'string')]
     private string $login;
 
+    #[OA\Property(type: 'string[]')]
     private array $roles = [];
 
     /**
@@ -15,12 +18,16 @@ class User implements JWTUserInterface
      */
     private string $password;
 
+    #[OA\Property(type: 'string')]
     private string $url;
 
+    #[OA\Property(type: 'string')]
     private string $version;
 
+    #[OA\Property(type: 'string')]
     private string $stateHash;
 
+    #[OA\Property(type: 'string')]
     private string $licenseHash;
 
     public function getLogin(): ?string
@@ -122,7 +129,11 @@ class User implements JWTUserInterface
         return $user;
     }
 
-    public function getIikoHeaders($clientId): array
+    /**
+     * @param string $clientId
+     * @return string[]
+     */
+    public function getIikoHeaders(string $clientId): array
     {
         $result  = [
             'Content-Type' => 'text/plain',
