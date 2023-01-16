@@ -10,7 +10,7 @@ use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Uid\Uuid;
 
-class InfoRepository
+class InfoRepository extends BaseRepository
 {
     private $client;
 
@@ -74,17 +74,10 @@ class InfoRepository
             $xml->addChild($key, $value);
         }
         $body =  $xml->asXML();
+
+        $header  = $this->getRequestHeader($user, $uuid);
         $response = $this->client->request('POST', $url, [
-          'headers' => [
-            'Content-Type' => 'text/plain',
-            'X-Resto-CorrelationId' => $uuid,
-            'X-Resto-LoginName' => $user->getLogin(),
-            'X-Resto-PasswordHash' => $user->getPassword(), //hash printf "resto#test" | sha1sum
-            'X-Resto-BackVersion' => $user->getVersion(),
-            'X-Resto-AuthType' => 'BACK',
-            'X-Resto-ServerEdition' => 'IIKO_RMS',
-            'Accept-Language' => 'ru'
-          ],
+          'headers' => $header,
           'body' => $body,
         ]);
         $statusCode = $response->getStatusCode();
