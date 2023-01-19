@@ -9,6 +9,7 @@ PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
 PHPSTAN  = $(PHP_CONT) vendor/bin/phpstan
+PHPCS  	 = $(PHP_CONT) vendor/bin/phpcs
 
 # Paths
 PATH_ROOT    = .
@@ -78,5 +79,15 @@ test-phpstan:
   		--level=$(PHPSTAN_LEVEL)                      \
 	   	--no-ansi                                     \
 			 "$(PATH_SRC)"
+	
+test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
+	$(call title,"Testing by PHP_CodeSniffer by path: $(FIX_PATH)")
+	@$(PHPCS) --version
+	@$(PHPCS) "$(PATH_SRC)"       \
+        --standard="$(PATH_ROOT)/.phpcs.xml"                           \
+        --report=full                                                  \
+        --parallel=$(PROC_NUM)                                         \
+        -p -s
+
 
 
