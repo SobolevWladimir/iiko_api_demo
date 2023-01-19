@@ -25,14 +25,15 @@ class IikoResponse implements \JsonSerializable
         $result = new IikoResponse();
         $parse = new \SimpleXMLElement($xml);
         $result->setReturnValue($parse->returnValue);
-        $result->setSuccess($parse->success);
-        $result->setErrorString($parse->errorString);
-        $result->setResultStatus($parse->resultStatus);
+        $result->setSuccess((string)$parse->success);
+        $result->setErrorString((string)$parse->errorString);
+        $result->setResultStatus((string)$parse->resultStatus);
         $result->setLicenseInfo(LicenseInfo::fromXml($parse->licenseInfo));
         return $result;
     }
 
-    public function jsonSerialize()
+    /** @return mixed[]  */
+    public function jsonSerialize(): array
     {
         return [
             'returnValue' => $this->getReturnValue(),

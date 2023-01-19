@@ -12,7 +12,7 @@ class User implements JWTUserInterface
     #[OA\Property(type: 'string')]
     private string $login;
 
-    #[OA\Property(type: 'string[]')]
+    /** @var string[] $roles */
     private array $roles = [];
 
     /**
@@ -77,10 +77,13 @@ class User implements JWTUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param string[] $roles
+     * @return User
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -102,7 +105,7 @@ class User implements JWTUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -119,7 +122,12 @@ class User implements JWTUserInterface
     }
 
 
-    public static function createFromPayload($username, array $payload)
+    /**
+     * @param string $username
+     * @param mixed[] $payload
+     * @return User
+     */
+    public static function createFromPayload($username, array $payload): User
     {
         $user  = new User();
         $user->setLogin($username);

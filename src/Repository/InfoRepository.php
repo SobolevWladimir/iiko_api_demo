@@ -8,13 +8,12 @@ use App\Entity\ServerInfo;
 use App\Entity\IikoResponse;
 use App\Security\User;
 use Symfony\Component\HttpClient\Exception\TransportException;
-use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Uid\Uuid;
 
 class InfoRepository extends BaseRepository
 {
-    private $client;
+    private HttpClientInterface $client;
 
     public function __construct(HttpClientInterface $client)
     {
@@ -32,8 +31,6 @@ class InfoRepository extends BaseRepository
         try {
             $statusCode = $response->getStatusCode();
         } catch (TransportException) {
-            return false;
-        } catch (TimeoutException) {
             return false;
         }
 
@@ -58,7 +55,7 @@ class InfoRepository extends BaseRepository
 
     public function getFingerPrints(User $user): IikoResponse
     {
-        $uuid  = Uuid::v4();
+        $uuid  = $this->generateNewClientId();
         $path = "/services/authorization?methodName=getCurrentFingerPrints";
         $url = $user->getUrl() . $path;
         $xmlData  = [
@@ -73,7 +70,7 @@ class InfoRepository extends BaseRepository
         ];
         $xml = new \SimpleXMLElement('<args/>');
         foreach ($xmlData as $key => $value) {
-            $xml->addChild($key, $value);
+            $xml->addChild((string)$key, (string)$value);
         }
         $body =  $xml->asXML();
 

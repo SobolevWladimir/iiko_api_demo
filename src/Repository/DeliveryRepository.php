@@ -16,7 +16,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DeliveryRepository extends BaseRepository
 {
-    private $client;
+    private HttpClientInterface $client;
 
     public function __construct(HttpClientInterface $client)
     {
@@ -51,7 +51,16 @@ class DeliveryRepository extends BaseRepository
         return DeliveryTerminal::fromIIKOResponse($res);
     }
 
-    public function getDeliveryOrders(User $user)
+    /**
+     * @param User $user
+     * @return IikoResponse
+     * @throws TransportExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws Exception
+     */
+    public function getDeliveryOrders(User $user): IikoResponse
     {
         $clientId = $this->generateNewClientId();
         $path = "/services/deliveryOrdersLoading?methodName=getAllDeliveryOrdersBrdData";

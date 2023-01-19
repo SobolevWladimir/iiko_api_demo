@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Security\User;
+use SimpleXMLElement;
 use Symfony\Component\Uid\Uuid;
 
 class BaseRepository
@@ -14,13 +15,13 @@ class BaseRepository
         return (string)Uuid::v4();
     }
 
-    public function getRequestBody(User $user, $clientId): \SimpleXMLElement
+    public function getRequestBody(User $user, string $clientId): \SimpleXMLElement
     {
         $xmlData  = [
             'entities-version' => -1,
             'client-type' => 'BACK',
             'enable-warnings' => 'false',
-            'client-call-id' => $clientId, // TODO:  должно обыть равно с  X-Resto-CorrelationId, которая в свою очередь динамически генерируется
+            'client-call-id' => $clientId,
             'license-hash' => $user->getLicenseHash(),
             'restrictions-state-hash' => $user->getStateHash(),
             'obtained-license-connections-ids' => '',
@@ -29,12 +30,17 @@ class BaseRepository
         ];
         $xml = new \SimpleXMLElement('<args/>');
         foreach ($xmlData as $key => $value) {
-            $xml->addChild($key, $value);
+            $xml->addChild((string)$key, (string)$value);
         }
         return $xml;
     }
 
-    public function getRequestHeader(User $user, $clientId): array
+    /**
+     * @param User $user
+     * @param string $clientId
+     * @return array<string, string|null>
+     */
+    public function getRequestHeader(User $user, string $clientId): array
     {
         $result  = [
             'Content-Type' => 'text/plain',

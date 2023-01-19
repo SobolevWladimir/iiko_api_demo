@@ -65,7 +65,9 @@ class ServerInfo
     {
         $this->serverState = $serverState;
     }
-    public function toArray()
+
+    /** @return mixed[]  */
+    public function toArray(): array
     {
         return get_object_vars($this);
     }
@@ -74,11 +76,11 @@ class ServerInfo
     {
         $parse = new \SimpleXMLElement($xml);
         $result = new ServerInfo();
-        $result->setServerName($parse->serverName);
-        $result->setEdition($parse->edition);
-        $result->setVersion($parse->version);
-        $result->setComputerName($parse->computerName);
-        $result->setServerState($parse->serverState);
+        $result->setServerName((string)$parse->serverName);
+        $result->setEdition((string)$parse->edition);
+        $result->setVersion((string)$parse->version);
+        $result->setComputerName((string)$parse->computerName);
+        $result->setServerState((string)$parse->serverState);
         return $result;
     }
 }

@@ -20,15 +20,16 @@ class LicenseInfo implements \JsonSerializable
     public static function fromXml(\SimpleXMLElement $parse): LicenseInfo
     {
         $result = new LicenseInfo();
-        $result->setLicenseHash($parse->licenseHash);
-        $result->setLicenseData($parse->licenseData);
-        $result->setStateHash($parse->stateHash);
-        $result->setStateData($parse->stateData);
-        $result->setValidTill($parse->validTill);
+        $result->setLicenseHash((string)$parse->licenseHash);
+        $result->setLicenseData((string)$parse->licenseData);
+        $result->setStateHash((string)$parse->stateHash);
+        $result->setStateData((string)$parse->stateData);
+        $result->setValidTill((string)$parse->validTill);
         return $result;
     }
 
-    public function jsonSerialize()
+    /** @return mixed[]  */
+    public function jsonSerialize(): array
     {
         return [
             'licenseHash' => $this->getLicenseHash(),
