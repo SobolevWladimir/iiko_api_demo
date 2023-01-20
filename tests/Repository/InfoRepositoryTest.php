@@ -34,7 +34,7 @@ final class InfoRepositoryTest extends TestCase
      */
     public function checkServerInfo(User $user): void
     {
-        $str =  '<r><serverName>myTest</serverName><edition>default</edition><version>8.2.7014.0</version><computerName>arseniy-cloud-0.arseniy-cloud.clients.svc.cluster.local</computerName><serverState>STARTED_SUCCESSFULLY</serverState><protocol null="1"></protocol><serverAddr null="1"></serverAddr><serverSubUrl null="1"></serverSubUrl><port>0</port><isPresent>false</isPresent></r>';
+        $str =  (string)file_get_contents('./info/server_info.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
         ]);

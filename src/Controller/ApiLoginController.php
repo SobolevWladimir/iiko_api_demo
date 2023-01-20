@@ -33,8 +33,11 @@ class ApiLoginController extends AbstractController
      *     @OA\Schema(type="string")
      * )
      */
-    public function getTokenUser(Request $request, InfoRepository $repository, JWTTokenManagerInterface $JWTManager): Response
-    {
+    public function getTokenUser(
+        Request $request,
+        InfoRepository $repository,
+        JWTTokenManagerInterface $JWTManager
+    ): Response {
         $data  = $request->toArray();
 
         $user = new User();
@@ -42,7 +45,7 @@ class ApiLoginController extends AbstractController
         $user->setUrl($data['url']);
         $user->setPassword(sha1($data['password']));
         if (!$repository->checkServerAviable($user)) {
-            return new Response('The server is not available', Response::HTTP_BAD_REQUEST);
+            return new Response('Сервер не доступен. Попробуйте указать другой сервер', Response::HTTP_BAD_REQUEST);
         }
         $serverInfo  = $repository->getServerInfo($user);
         $user->setVersion($serverInfo->getVersion());
@@ -50,7 +53,7 @@ class ApiLoginController extends AbstractController
         try {
             $fingerPrint = $repository->getFingerPrints($user);
         } catch (\Exception) {
-             return new Response('Ошибка авторзиции', Response::HTTP_BAD_GATEWAY);
+            return new Response('Ошибка авторизации! Попробуйте другой login/password', Response::HTTP_BAD_GATEWAY);
         }
         $payload = [
             'url'       => $user->getUrl(),
