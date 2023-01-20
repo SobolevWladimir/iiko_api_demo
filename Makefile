@@ -10,6 +10,7 @@ COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
 PHPSTAN  = $(PHP_CONT) vendor/bin/phpstan
 PHPCS  	 = $(PHP_CONT) vendor/bin/phpcs
+PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Paths
 PATH_ROOT    = .
@@ -66,6 +67,9 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+unit-test: 
+	@$(PHPUNIT)
 
 test-phpstan:
 	$(call title,"PHPStan - Static Analysis Tool")
