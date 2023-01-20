@@ -8,6 +8,22 @@ PHP_CONT = $(DOCKER_COMP) exec php
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
+PHPSTAN  = $(PHP_CONT) vendor/bin/phpstan
+PHPCS  	 = $(PHP_CONT) vendor/bin/phpcs
+PHPUNIT  = $(PHP_CONT) bin/phpunit
+
+# Paths
+PATH_ROOT    = .
+PATH_SRC     ?= $(PATH_ROOT)
+PATH_BUILD   ?= $(PATH_ROOT)/build
+
+
+# Other
+PROC_NUM          ?= 4
+PHP_MEMORY_LIMIT  ?= 2G
+PHPSTAN_LEVEL     ?= 8
+PATH_POSTFIX      ?= Default
+
 
 # Misc
 .DEFAULT_GOAL = help
@@ -51,3 +67,31 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+unit-test: 
+	@$(PHPUNIT)
+
+test-phpstan:
+	$(call title,"PHPStan - Static Analysis Tool")
+	@echo "Level   : $(PHPSTAN_LEVEL)"
+	@echo "Src Path: $(PATH_SRC)"
+	@echo "Config Path: $(PATH_SRC)/phpstan.neon"
+	@$(PHPSTAN)  analyse \
+			--configuration="$(PATH_ROOT)/phpstan.neon"   \
+	    --error-format=table                          \
+   	  --memory-limit=$(PHP_MEMORY_LIMIT)            \
+  		--level=$(PHPSTAN_LEVEL)                      \
+	   	--no-ansi                                     \
+			 "$(PATH_SRC)"
+	
+test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
+	$(call title,"Testing by PHP_CodeSniffer by path: $(FIX_PATH)")
+	@$(PHPCS) --version
+	@$(PHPCS) "$(PATH_SRC)"       \
+        --standard="$(PATH_ROOT)/.phpcs.xml"                           \
+        --report=full                                                  \
+        --parallel=$(PROC_NUM)                                         \
+        -p -s
+
+
+

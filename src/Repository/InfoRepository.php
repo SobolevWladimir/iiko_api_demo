@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
+use App\Entity\ServerInfo;
+use App\Entity\IikoResponse;
 use App\Security\User;
 use Symfony\Component\HttpClient\Exception\TransportException;
-use Symfony\Component\HttpClient\Exception\TimeoutException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Uid\Uuid;
 
-class InfoRepository
+class InfoRepository extends BaseRepository
 {
-    private $client;
+    private HttpClientInterface $client;
 
     public function __construct(HttpClientInterface $client)
     {
@@ -19,23 +23,21 @@ class InfoRepository
     public function checkServerAviable(User $user): bool
     {
         $path = "/get_server_info.jsp?encoding=utf-8";
-         $url = $user->getUrl() . $path;
-         $response = $this->client->request(
-             'GET',
-             $url,
-         );
+        $url = $user->getUrl() . $path;
+        $response = $this->client->request(
+            'GET',
+            $url,
+        );
         try {
             $statusCode = $response->getStatusCode();
         } catch (TransportException) {
-            return false;
-        } catch (TimeoutException) {
             return false;
         }
 
         return $statusCode === 200;
     }
 
-    public function getServerInfo(User $user)
+    public function getServerInfo(User $user): ServerInfo
     {
         $path = "/get_server_info.jsp?encoding=utf-8";
         $url = $user->getUrl() . $path;
@@ -45,11 +47,42 @@ class InfoRepository
         );
 
         $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        return $content;
+        if ($statusCode != 200) {
+            throw new \Exception($response->getContent(), $statusCode);
+        }
+        return ServerInfo::fromXml($response->getContent());
+    }
+
+    public function getFingerPrints(User $user): IikoResponse
+    {
+        $uuid  = $this->generateNewClientId();
+        $path = "/services/authorization?methodName=getCurrentFingerPrints";
+        $url = $user->getUrl() . $path;
+        $xmlData  = [
+            'entities-version' => -1,
+            'client-type' => 'BACK',
+            'enable-warnings' => 'false',
+            'client-call-id' => $uuid,
+            'license-hash' => '0',
+            'restrictions-state-hash' => '0',
+            'obtained-license-connections-ids' => '',
+            'use-raw-entities' => 'true',
+        ];
+        $xml = new \SimpleXMLElement('<args/>');
+        foreach ($xmlData as $key => $value) {
+            $xml->addChild((string)$key, (string)$value);
+        }
+        $body =  $xml->asXML();
+
+        $header  = $this->getRequestHeader($user, $uuid);
+        $response = $this->client->request('POST', $url, [
+          'headers' => $header,
+          'body' => $body,
+        ]);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode != 200) {
+            throw new \Exception($response->getContent(), $statusCode);
+        }
+        return IikoResponse::fromXml($response->getContent());
     }
 }

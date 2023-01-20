@@ -2,8 +2,15 @@ nelmio_api_doc:
     documentation:
         info:
             title: iikoProtokol 
-            description:  внутреннее (скрытое) api iiko сервера  полученное путем прослуши  
-            version: 1.0.0
+            description:  внутреннее (скрытое) api iiko сервера полученное путем прослуши  
+            version: 0.0.1
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+
     areas: # to filter documented areas
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

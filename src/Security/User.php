@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use OpenApi\Attributes as OA;
 
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements JWTUserInterface
 {
+    #[OA\Property(type: 'string')]
     private string $login;
 
+    /** @var string[] $roles */
     private array $roles = [];
 
     /**
@@ -16,8 +20,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private string $password;
 
+    #[OA\Property(type: 'string')]
     private string $url;
 
+    #[OA\Property(type: 'string')]
+    private string $version;
+
+    #[OA\Property(type: 'string')]
+    private string $stateHash;
+
+    #[OA\Property(type: 'string')]
+    private string $licenseHash;
 
     public function getLogin(): ?string
     {
@@ -64,10 +77,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param string[] $roles
+     * @return User
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -89,9 +105,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getVersion(): string
+    {
+        return $this->version;
+    }
+
+    public function setVersion(string $version): void
+    {
+        $this->version = $version;
+    }
+
+
+    /**
+     * @param string $username
+     * @param mixed[] $payload
+     * @return User
+     */
+    public static function createFromPayload($username, array $payload): User
+    {
+        $user  = new User();
+        $user->setLogin($username);
+        $user->setUrl($payload['url']);
+        $user->setPassword($payload['password']);
+        $user->setVersion($payload['version']);
+        $user->setStateHash($payload['state-hash']);
+        $user->setLicenseHash($payload['license-hash']);
+        return $user;
+    }
+
+    public function getStateHash(): string
+    {
+        return $this->stateHash;
+    }
+
+    public function setStateHash(string $stateHash): void
+    {
+        $this->stateHash = $stateHash;
+    }
+
+    public function getLicenseHash(): string
+    {
+        return $this->licenseHash;
+    }
+
+    public function setLicenseHash(string $licenseHash): void
+    {
+        $this->licenseHash = $licenseHash;
     }
 }

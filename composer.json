@@ -18,6 +18,7 @@
     "symfony/framework-bundle": "6.2.*",
     "symfony/http-client": "6.2.*",
     "symfony/runtime": "6.2.*",
+    "symfony/uid": "6.2.*",
     "symfony/yaml": "6.2.*"
   },
   "config": {
@@ -69,7 +70,9 @@
     }
   },
   "require-dev": {
+    "phpstan/phpstan": "^1.9",
     "phpunit/phpunit": "^9.5",
+    "squizlabs/php_codesniffer": "^3.7",
     "symfony/browser-kit": "6.2.*",
     "symfony/css-selector": "6.2.*",
     "symfony/maker-bundle": "^1.48",
