@@ -7,7 +7,7 @@
 Этот проет нацелен на изучение внeтреннго протокола обмена  между  сервером iiko  и клиентами(iikoOffice). Проект основан на [symfony-docker](https://github.com/dunglas/symfony-docker)
 
 
-## Начало работы 
+## Запуск сервера с помощью Docker Compose 
 
 1. Если еще не установили, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 2. Запустите `make build --pull --no-cache` для сборки проекта 
@@ -15,10 +15,13 @@
 4. Откройте `https://localhost` в браузере и  [примените сгенерированный  TLS сертификат](https://stackoverflow.com/a/15076602/1352334)
 5. Для остановки  запустите команду `make down`.
 
+## Документация на api 
+1. /doc.json  openapi файл 
+2. 
 
-## Документация
-
-1. 
+## Начало работы
+1. Получаем токен 
+2. Делаем нужный запрос подстовляя токен в заголовок (Authorization: Bearer {you_token})
 
 ## License
 
