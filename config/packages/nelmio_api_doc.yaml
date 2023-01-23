@@ -12,6 +12,9 @@ nelmio_api_doc:
                     bearerFormat: JWT
 
     areas: # to filter documented areas
-        path_patterns:
-            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
-            - ^/login # Accepts routes under /api except /api/doc
+        auth: 
+          path_patterns:
+             - ^/login # Accepts routes under /api except /api/doc
+        default:
+          path_patterns:
+              - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

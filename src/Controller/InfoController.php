@@ -6,6 +6,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 
+/**
+ * Class InfoController
+ *
+ * @OA\Tag(name="Информация о сервере")
+ */
 class InfoController
 {
      /**

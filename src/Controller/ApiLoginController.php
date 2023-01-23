@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Security\User;
 use App\Repository\InfoRepository;
-use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationSuccessResponse;
+use App\Entity\AuthData;
 use OpenApi\Annotations as OA;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -16,12 +16,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
+/**
+ * Class ApiLoginController
+ *
+ * @OA\Tag(name="Пользователь")
+ */
 class ApiLoginController extends AbstractController
 {
      /**
      * Получение токена.
      *
      * @Route("/api/login", methods={"POST"})
+     *
+     * @OA\RequestBody(@Model(type=AuthData::class))
+     *
      * @OA\Response(
      *     response=200,
      *     description="Токен доступа",
@@ -38,12 +46,8 @@ class ApiLoginController extends AbstractController
         InfoRepository $repository,
         JWTTokenManagerInterface $JWTManager
     ): Response {
-        $data  = $request->toArray();
-
-        $user = new User();
-        $user->setLogin($data['login']);
-        $user->setUrl($data['url']);
-        $user->setPassword(sha1($data['password']));
+        $authData = AuthData::fromArray($request->toArray());
+        $user = $authData->toUser();
         if (!$repository->checkServerAviable($user)) {
             return new Response('Сервер не доступен. Попробуйте указать другой сервер', Response::HTTP_BAD_REQUEST);
         }
@@ -63,7 +67,7 @@ class ApiLoginController extends AbstractController
             'license-hash' => $fingerPrint->getLicenseInfo()->getLicenseHash(),
         ];
         $token  = $JWTManager->createFromPayload($user, $payload);
-        return new JWTAuthenticationSuccessResponse($token);
+        return new Response($token);
     }
 
      /**
