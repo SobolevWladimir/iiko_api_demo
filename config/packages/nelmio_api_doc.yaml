@@ -2,7 +2,7 @@ nelmio_api_doc:
     documentation:
         info:
             title: iikoProtokol 
-            description:  внутреннее (скрытое) api iiko сервера полученное путем прослуши  
+            description: Сервер который позволяет работать с iiko без iikoBiz или iikoCloud.
             version: 0.0.1
         components:
             securitySchemes:
