@@ -29,8 +29,5 @@ route {
     push
     php_fastcgi unix//var/run/php/php-fpm.sock
     encode zstd gzip
-    handle_path /sg/* { 
-      reverse_proxy  localhost:8082
-    }
     file_server
 }
