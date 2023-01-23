@@ -24,28 +24,12 @@ services:
       MERCURE_PUBLIC_URL: https://${SERVER_NAME:-localhost}/.well-known/mercure
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
 
-  swagger-ui:
-    image: swaggerapi/swagger-ui
-    container_name: "swagger-ui"
-    ports:
-      # HTTP
-      - target: 8080
-        published: ${SWAGER_PORT:-8082}
-        protocol: tcp
-    volumes:
-      - ./swagger/openapi.json:/openapi.json
-    environment:
-       SWAGGER_JSON: /openapi.json
-      #SWAGGER_JSON_URL: https://localhost:4443/doc.json
-       API_URL: "https://localhost:4443"
-
   caddy:
     build:
       context: .
       target: app_caddy
     depends_on:
       - php
-      - swagger-ui
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
