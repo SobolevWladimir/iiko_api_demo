@@ -14,7 +14,7 @@
 Проект основан на [symfony-docker](https://github.com/dunglas/symfony-docker).
 Проект не использует базу данных и __данные авторизации не хронятся на сервере__.
 
-[Демонстрация](https://example.com)
+[Демонстрация](http://ikp.vladimir-sobolev.ru/swagger)
 
 
 ## Запуск сервера с помощью Docker Compose 
