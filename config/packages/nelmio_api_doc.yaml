@@ -2,7 +2,7 @@ nelmio_api_doc:
     documentation:
         info:
             title: iikoProtokol 
-            description:  внутреннее (скрытое) api iiko сервера полученное путем прослуши  
+            description: Сервер который позволяет работать с iiko без iikoBiz или iikoCloud.
             version: 0.0.1
         components:
             securitySchemes:
@@ -12,6 +12,9 @@ nelmio_api_doc:
                     bearerFormat: JWT
 
     areas: # to filter documented areas
-        path_patterns:
-            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
-            - ^/login # Accepts routes under /api except /api/doc
+        auth: 
+          path_patterns:
+             - ^/login # Accepts routes under /api except /api/doc
+        default:
+          path_patterns:
+              - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

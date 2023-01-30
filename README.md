@@ -1,46 +1,42 @@
-# Symfony Docker
+# Iiko Protokol API
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
+    Сервер который позволяет работать с iiko без iikoBiz или iikoCloud. 
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+⚠️ Это неофициальная библиотека. 
 
-## Getting Started
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --pull --no-cache` to build fresh images
-3. Run `docker compose up` (the logs will be displayed in the current shell)
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+### Цели проекта: 
 
-## Features
+1. Изучение внутреннего протокола обмена между программами iiko.  
+2. Обеспечить работу с сервером iiko в удобном формате. 
 
-* Production, development and CI ready
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and in prod!)
-* HTTP/2, HTTP/3 and [Preload](https://symfony.com/doc/current/web_link.html) support
-* Built-in [Mercure](https://symfony.com/doc/current/mercure.html) hub
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Just 2 services (PHP FPM and Caddy server)
-* Super-readable configuration
 
-**Enjoy!**
+Проект основан на [symfony-docker](https://github.com/dunglas/symfony-docker).
+Проект не использует базу данных и __данные авторизации не хранятся на сервере__.
 
-## Docs
+[Демонстрация](http://ikp.vladimir-sobolev.ru/swagger)
 
-1. [Build options](docs/build.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using a Makefile](docs/makefile.md)
-8. [Troubleshooting](docs/troubleshooting.md)
 
-## License
+## Запуск сервера с помощью Docker Compose 
 
-Symfony Docker is available under the MIT License.
+1. Если еще не установили, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+2. Запустите `make build --pull --no-cache` для сборки проекта 
+3. Запустите проект `make up` 
+4. Откройте `https://localhost` в браузере и  [примените сгенерированный  TLS сертификат](https://stackoverflow.com/a/15076602/1352334)
+5. Для остановки,  запустите команду `make down`.
 
-## Credits
+## Документация на api 
+1. /doc.json --  openapi файл 
+2. /swagger --  swagger-ui
 
-Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+ 
+## Начало работы
+ В первую очередь необходимо получить токен отправкой post запроса на /api/login. Где указываем url (адрес вашего сервера. Например: 'https://my-cloud.iiko.it:443/resto')
+ и login/password (данные для входа на сервер). В случае если сервер ответил кодом 200, копируем токен и     
+делаем нужный запрос подставляя токен в заголовок (Authorization: Bearer {you_token})
+
+## Полезные ссылки
+
+1. [Подробно про авторизацию](docs/auth.md). 
+2. [Как работают запросы к серверу iiko](docs/iiko_request.md) 
+
