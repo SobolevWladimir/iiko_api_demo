@@ -12,7 +12,7 @@
 
 
 Проект основан на [symfony-docker](https://github.com/dunglas/symfony-docker).
-Проект не использует базу данных и __данные авторизации не хронятся на сервере__.
+Проект не использует базу данных и __данные авторизации не хранятся на сервере__.
 
 [Демонстрация](http://ikp.vladimir-sobolev.ru/swagger)
 
@@ -21,19 +21,19 @@
 
 1. Если еще не установили, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 2. Запустите `make build --pull --no-cache` для сборки проекта 
-3. Зфпустите проект `make up` 
+3. Запустите проект `make up` 
 4. Откройте `https://localhost` в браузере и  [примените сгенерированный  TLS сертификат](https://stackoverflow.com/a/15076602/1352334)
-5. Для остановки  запустите команду `make down`.
+5. Для остановки,  запустите команду `make down`.
 
 ## Документация на api 
-1. /doc.json  openapi файл 
-2. /swagger  swagger-ui
+1. /doc.json --  openapi файл 
+2. /swagger --  swagger-ui
 
  
 ## Начало работы
  В первую очередь необходимо получить токен отправкой post запроса на /api/login. Где указываем url (адрес вашего сервера. Например: 'https://my-cloud.iiko.it:443/resto')
  и login/password (данные для входа на сервер). В случае если сервер ответил кодом 200, копируем токен и     
-делаем нужный запрос подстовляя токен в заголовок (Authorization: Bearer {you_token})
+делаем нужный запрос подставляя токен в заголовок (Authorization: Bearer {you_token})
 
 ## Полезные ссылки
 
