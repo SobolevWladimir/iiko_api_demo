@@ -7,8 +7,6 @@ on:
     branches: [ "master" ]
 
 jobs:
-
- jobs:
     lint:
         name: Docker Lint
         runs-on: ubuntu-latest
