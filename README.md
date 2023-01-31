@@ -20,7 +20,7 @@
 ## Запуск сервера с помощью Docker Compose 
 
 1. Если еще не установили, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Запустите `make build --pull --no-cache` для сборки проекта 
+2. Запустите `make build` для сборки проекта 
 3. Запустите проект `make up` 
 4. Откройте `https://localhost` в браузере и  [примените сгенерированный  TLS сертификат](https://stackoverflow.com/a/15076602/1352334)
 5. Для остановки,  запустите команду `make down`.
