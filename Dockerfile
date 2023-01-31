@@ -96,7 +96,7 @@ FROM app_php AS app_php_dev
 ENV APP_ENV=dev XDEBUG_MODE=off
 VOLUME /srv/app/var/
 
-RUN rm $PHP_INI_DIR/conf.d/app.prod.ini; \
+RUN rm "$PHP_INI_DIR/conf.d/app.prod.ini"; \
   mv "$PHP_INI_DIR/php.ini" "$PHP_INI_DIR/php.ini-production"; \
   mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
