@@ -109,7 +109,7 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
 
 test-phpcsfixer: 
 	$(call tcStart,"Format code by phpcs_fixer")
-	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff ./
+	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff $(PATH_SRC)
 
 
 test-composer: ##@Testing Validate "composer.json" and "composer.lock".
@@ -128,5 +128,5 @@ test-composer: ##@Testing Validate "composer.json" and "composer.lock".
 
 format-phpcsfixer: 
 	$(call tcStart,"Format code by phpcs_fixer")
-	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer 
+	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix $(PATH_SRC)
 
