@@ -7,10 +7,12 @@ $finder = PhpCsFixer\Finder::create()
     ])
 ;
 
-return PhpCsFixer\Config::create()
-    ->setRules([
+$config = new PhpCsFixer\Config();
+
+$config ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'trim_array_spaces'=>true,
         'concat_space' => ['spacing' => 'one'],
         'increment_style' => ['style' => 'post'],
         'no_extra_blank_lines' => ['tokens' => [
@@ -23,7 +25,8 @@ return PhpCsFixer\Config::create()
         'no_superfluous_phpdoc_tags' => false,
         'phpdoc_align' => false,
         'phpdoc_annotation_without_dot' => false,
-        'trailing_comma_in_multiline_array' => false,
         'yoda_style' => false
     ])
     ->setFinder($finder);
+
+return $config;

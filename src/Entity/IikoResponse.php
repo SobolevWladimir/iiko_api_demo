@@ -14,7 +14,7 @@ class IikoResponse implements \JsonSerializable
 
     private string $resultStatus;
 
-    //TODO: пока не стал парсить
+    // TODO: пока не стал парсить
     // private  string $stackTrace;
     // private  string $entitiesUpdate;
 
@@ -25,10 +25,11 @@ class IikoResponse implements \JsonSerializable
         $result = new IikoResponse();
         $parse = new \SimpleXMLElement($xml);
         $result->setReturnValue($parse->returnValue);
-        $result->setSuccess((string)$parse->success);
-        $result->setErrorString((string)$parse->errorString);
-        $result->setResultStatus((string)$parse->resultStatus);
+        $result->setSuccess((string) $parse->success);
+        $result->setErrorString((string) $parse->errorString);
+        $result->setResultStatus((string) $parse->resultStatus);
         $result->setLicenseInfo(LicenseInfo::fromXml($parse->licenseInfo));
+
         return $result;
     }
 

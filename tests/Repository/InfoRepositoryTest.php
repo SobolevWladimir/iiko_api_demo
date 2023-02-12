@@ -26,6 +26,7 @@ final class InfoRepositoryTest extends TestCase
 
         $this->assertTrue($repository->checkServerAviable($user));
         $this->assertFalse($repository->checkServerAviable($user));
+
         return $user;
     }
 
@@ -34,7 +35,7 @@ final class InfoRepositoryTest extends TestCase
      */
     public function checkServerInfo(User $user): void
     {
-        $str =  (string)file_get_contents('./info/server_info.xml');
+        $str = (string) file_get_contents('./info/server_info.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
         ]);

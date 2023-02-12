@@ -28,3 +28,6 @@
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
+
+### phpcs_fixer 
+.php-cs-fixer.cache

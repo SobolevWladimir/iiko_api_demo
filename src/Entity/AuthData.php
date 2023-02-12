@@ -48,11 +48,13 @@ class AuthData
         $user->setLogin($this->getLogin());
         $user->setUrl($this->getUrl());
         $user->setPassword(sha1($this->getPassword()));
+
         return $user;
     }
 
     /**
      * @param mixed[] $data
+     *
      * @return AuthData
      */
     public static function fromArray(array $data): AuthData
@@ -61,6 +63,7 @@ class AuthData
         $result->setLogin($data['login']);
         $result->setUrl($data['url']);
         $result->setPassword($data['password']);
+
         return $result;
     }
 }
