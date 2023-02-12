@@ -21,20 +21,20 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  */
 class DeliveryController extends AbstractController
 {
-     /**
-     *  Получить список терминалов
-     *
-     * @Route("/api/delivery/terminals", methods={"GET"})
-     * @OA\Response(
-     *     response=200,
-     *     description="Получить терминалы доставки",
-     *     @OA\JsonContent(
-     *        description="Возвращает список терминалов доставки",
-     *        type="array",
-     *         @OA\Items(ref=@Model(type=DeliveryTerminal::class))
-     *     )
-     * )
-     */
+    /**
+    *  Получить список терминалов
+    *
+    * @Route("/api/delivery/terminals", methods={"GET"})
+    * @OA\Response(
+    *     response=200,
+    *     description="Получить терминалы доставки",
+    *     @OA\JsonContent(
+    *        description="Возвращает список терминалов доставки",
+    *        type="array",
+    *         @OA\Items(ref=@Model(type=DeliveryTerminal::class))
+    *     )
+    * )
+    */
     public function getTerminals(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
         $result = $repository->getTerminals($user);

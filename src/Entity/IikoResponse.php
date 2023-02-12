@@ -14,9 +14,9 @@ class IikoResponse implements \JsonSerializable
 
     private string $resultStatus;
 
-   //TODO: пока не стал парсить
-   // private  string $stackTrace;
-   // private  string $entitiesUpdate;
+    //TODO: пока не стал парсить
+    // private  string $stackTrace;
+    // private  string $entitiesUpdate;
 
     private LicenseInfo $licenseInfo;
 

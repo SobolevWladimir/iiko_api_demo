@@ -23,24 +23,24 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
  */
 class ApiLoginController extends AbstractController
 {
-     /**
-     * Получение токена.
-     *
-     * @Route("/api/login", methods={"POST"})
-     *
-     * @OA\RequestBody(@Model(type=AuthData::class))
-     *
-     * @OA\Response(
-     *     response=200,
-     *     description="Токен доступа",
-     *     @OA\Schema(type="string")
-     * )
-     * @OA\Response(
-     *     response=400,
-     *     description="Ошибка",
-     *     @OA\Schema(type="string")
-     * )
-     */
+    /**
+    * Получение токена.
+    *
+    * @Route("/api/login", methods={"POST"})
+    *
+    * @OA\RequestBody(@Model(type=AuthData::class))
+    *
+    * @OA\Response(
+    *     response=200,
+    *     description="Токен доступа",
+    *     @OA\Schema(type="string")
+    * )
+    * @OA\Response(
+    *     response=400,
+    *     description="Ошибка",
+    *     @OA\Schema(type="string")
+    * )
+    */
     public function getTokenUser(
         Request $request,
         InfoRepository $repository,

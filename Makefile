@@ -14,7 +14,7 @@ PHPUNIT  = $(PHP_CONT) bin/phpunit
 
 # Paths
 PATH_ROOT    = .
-PATH_SRC     ?= $(PATH_ROOT)
+PATH_SRC     ?= $(PATH_ROOT)/src
 PATH_BUILD   ?= $(PATH_ROOT)/build
 
 
