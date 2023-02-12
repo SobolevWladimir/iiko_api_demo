@@ -106,6 +106,12 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
         --parallel=$(PROC_NUM)                                         \
         -p -s
 
+
+test-phpcsfixer: 
+	$(call tcStart,"Format code by phpcs_fixer")
+	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff ./
+
+
 test-composer: ##@Testing Validate "composer.json" and "composer.lock".
 	$(call tcStart,"test-composer: Composer - Basic Diagnose")
 	$(call title,"Composer - Looking for common issues")
@@ -116,4 +122,11 @@ test-composer: ##@Testing Validate "composer.json" and "composer.lock".
 	$(call title,"Composer - List of outdated packages")
 	@$(COMPOSER) outdated            --no-interaction --direct
 	$(call tcFinish,"test-composer: Composer - Basic Diagnose")
+
+
+## —— Format ———————————————————————————————————————————————————————————————
+
+format-phpcsfixer: 
+	$(call tcStart,"Format code by phpcs_fixer")
+	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer 
 
