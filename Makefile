@@ -68,10 +68,14 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
-unit-test: 
+
+## —— Tests ———————————————————————————————————————————————————————————————
+
+unit-test:  ## phpunit test
+	$(call title,"PHPUnit tests")
 	@$(PHPUNIT)
 
-test-phpstan:
+test-phpstan: ## phpstan -static analyse tool
 	$(call title,"PHPStan - Static Analysis Tool")
 	@echo "Level   : $(PHPSTAN_LEVEL)"
 	@echo "Src Path: $(PATH_SRC)"

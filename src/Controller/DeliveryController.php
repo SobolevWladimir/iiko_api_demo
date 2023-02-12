@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
+/**
+ * Class DeliveryController
+ * @Security(name="Bearer")
+ * @OA\Tag(name="Доставки")
+ */
 class DeliveryController extends AbstractController
 {
      /**
