@@ -71,9 +71,17 @@ cc: sf
 
 ## —— Tests ———————————————————————————————————————————————————————————————
 
-unit-test:  ## phpunit test
+test-all:## all tests
+	$(call title,"All tests")
+	@make test-phpcs
+	@make test-phpstan
+	@make test-phpunit
+
+
+test-phpunit:  ## phpunit test
 	$(call title,"PHPUnit tests")
 	@$(PHPUNIT)
+
 
 test-phpstan: ## phpstan -static analyse tool
 	$(call title,"PHPStan - Static Analysis Tool")
@@ -87,6 +95,7 @@ test-phpstan: ## phpstan -static analyse tool
   		--level=$(PHPSTAN_LEVEL)                      \
 	   	--no-ansi                                     \
 			 "$(PATH_SRC)"
+
 	
 test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
 	$(call title,"Testing by PHP_CodeSniffer by path: $(FIX_PATH)")
@@ -96,6 +105,5 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
         --report=full                                                  \
         --parallel=$(PROC_NUM)                                         \
         -p -s
-
 
 

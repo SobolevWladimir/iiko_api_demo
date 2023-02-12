@@ -42,3 +42,7 @@ jobs:
               run: curl http://localhost
             - name: Check HTTPS reachability
               run: curl -k https://localhost
+
+            - name: 'Check phpstan'
+              run: make test-phpstan
+
