@@ -106,4 +106,14 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
         --parallel=$(PROC_NUM)                                         \
         -p -s
 
+test-composer: ##@Testing Validate "composer.json" and "composer.lock".
+	$(call tcStart,"test-composer: Composer - Basic Diagnose")
+	$(call title,"Composer - Looking for common issues")
+	@-$(COMPOSER) diagnose           --no-interaction
+	$(call title,"Composer - Validate system requirements")
+	@$(COMPOSER) validate            --no-interaction --strict --no-check-all
+	@$(COMPOSER) check-platform-reqs --no-interaction
+	$(call title,"Composer - List of outdated packages")
+	@$(COMPOSER) outdated            --no-interaction --direct
+	$(call tcFinish,"test-composer: Composer - Basic Diagnose")
 

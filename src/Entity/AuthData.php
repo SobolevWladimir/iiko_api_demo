@@ -51,6 +51,10 @@ class AuthData
         return $user;
     }
 
+    /**
+     * @param mixed[] $data
+     * @return AuthData
+     */
     public static function fromArray(array $data): AuthData
     {
         $result = new AuthData();

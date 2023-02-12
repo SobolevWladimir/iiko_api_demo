@@ -43,6 +43,16 @@ jobs:
             - name: Check HTTPS reachability
               run: curl -k https://localhost
 
+            - name: 'Check composer'
+              run: make test-composer
+
+            - name: 'Check phpcs'
+              run: make test-phpcs
+
             - name: 'Check phpstan'
               run: make test-phpstan
+
+            - name: 'Check unit test'
+              run: make test-phpunit
+
 
