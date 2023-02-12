@@ -46,8 +46,8 @@ jobs:
             - name: 'Check composer'
               run: make test-composer
 
-            - name: 'Check phpcs'
-              run: make test-phpcs
+            - name: 'Check phpcsfixer'
+              run: make test-phpcsfixer
 
             - name: 'Check phpstan'
               run: make test-phpstan
