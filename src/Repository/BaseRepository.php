@@ -29,8 +29,9 @@ class BaseRepository
         ];
         $xml = new \SimpleXMLElement('<args/>');
         foreach ($xmlData as $key => $value) {
-      $xml->addChild((string) $key, (string) $value);
+            $xml->addChild((string) $key, (string) $value);
         }
+
         return $xml;
     }
 
