@@ -5,16 +5,17 @@ DOCKER_COMP = docker compose
 PHP_CONT = $(DOCKER_COMP) exec php
 
 # Executables
-PHP      = $(PHP_CONT) php
-COMPOSER = $(PHP_CONT) composer
-SYMFONY  = $(PHP_CONT) bin/console
-PHPSTAN  = $(PHP_CONT) vendor/bin/phpstan
-PHPCS  	 = $(PHP_CONT) vendor/bin/phpcs
-PHPUNIT  = $(PHP_CONT) bin/phpunit
+PHP      		= $(PHP_CONT) php
+COMPOSER 		= $(PHP_CONT) composer
+SYMFONY  		= $(PHP_CONT) bin/console
+PHPSTAN  		= $(PHP_CONT) vendor/bin/phpstan
+PHPCSFIXER  = $(PHP_CONT) vendor/bin/php-cs-fixer
+PHPCS  	 		= $(PHP_CONT) vendor/bin/phpcs
+PHPUNIT  		= $(PHP_CONT) bin/phpunit
 
 # Paths
 PATH_ROOT    = .
-PATH_SRC     ?= $(PATH_ROOT)
+PATH_SRC     ?= $(PATH_ROOT)/src
 PATH_BUILD   ?= $(PATH_ROOT)/build
 
 
@@ -71,9 +72,17 @@ cc: sf
 
 ## —— Tests ———————————————————————————————————————————————————————————————
 
-unit-test:  ## phpunit test
+test-all:## all tests
+	$(call title,"All tests")
+	@make test-phpcs
+	@make test-phpstan
+	@make test-phpunit
+
+
+test-phpunit:  ## phpunit test
 	$(call title,"PHPUnit tests")
 	@$(PHPUNIT)
+
 
 test-phpstan: ## phpstan -static analyse tool
 	$(call title,"PHPStan - Static Analysis Tool")
@@ -87,6 +96,7 @@ test-phpstan: ## phpstan -static analyse tool
   		--level=$(PHPSTAN_LEVEL)                      \
 	   	--no-ansi                                     \
 			 "$(PATH_SRC)"
+
 	
 test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
 	$(call title,"Testing by PHP_CodeSniffer by path: $(FIX_PATH)")
@@ -98,4 +108,31 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
         -p -s
 
 
+test-composer: ##@Testing Validate "composer.json" and "composer.lock".
+	$(call tcStart,"test-composer: Composer - Basic Diagnose")
+	$(call title,"Composer - Looking for common issues")
+	@-$(COMPOSER) diagnose           --no-interaction
+	$(call title,"Composer - Validate system requirements")
+	@$(COMPOSER) validate            --no-interaction --strict --no-check-all
+	@$(COMPOSER) check-platform-reqs --no-interaction
+	$(call title,"Composer - List of outdated packages")
+	@$(COMPOSER) outdated            --no-interaction --direct
+	$(call tcFinish,"test-composer: Composer - Basic Diagnose")
+
+
+test-phpcsfixer: 
+	$(call tcStart,"Format code by phpcs_fixer")
+	@$(PHPCSFIXER) fix \
+	--dry-run \
+	--diff  \
+	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
+
+
+
+## —— Format ———————————————————————————————————————————————————————————————
+
+format-phpcsfixer: 
+	$(call tcStart,"Format code by phpcs_fixer")
+	@$(PHPCSFIXER) fix \
+	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
 

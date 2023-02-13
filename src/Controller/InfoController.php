@@ -2,21 +2,22 @@
 
 namespace App\Controller;
 
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 /**
- * Class InfoController
+ * Class InfoController.
  *
  * @OA\Tag(name="Информация о сервере")
  */
 class InfoController
 {
-     /**
+    /**
      * Получаем список файлов доступных для скачивания на сервере.
      *
      * @Route("/api/info", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="Массив с именами файлов",
@@ -27,18 +28,21 @@ class InfoController
         return new JsonResponse(['hello']);
     }
 
-     /**
-     * Получить сылку на скачивания iikoOffice
+    /**
+     * Получить сылку на скачивания iikoOffice.
      *
      * @Route("/api/office", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="Массив с именами файлов",
      * )
+     *
      * @OA\Parameter(
      *     name="host",
      *     in="query",
      *     description="host https://arseniy-cloud.iiko.it:443",
+     *
      *     @OA\Schema(type="string")
      * )
      */

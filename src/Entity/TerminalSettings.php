@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
- namespace App\Entity;
+namespace App\Entity;
 
 class TerminalSettings implements \JsonSerializable
 {
@@ -12,16 +12,17 @@ class TerminalSettings implements \JsonSerializable
 
     public static function fromXML(\SimpleXMLElement $xml): TerminalSettings
     {
-        $result   = new TerminalSettings();
-        $result->setAverageDeliveryProcessingTimeInMinutes((int)$xml->averageDeliveryProcessingTimeInMinutes);
-        $result->setAverageDSSPTInMinutes((int)$xml->averageDeliverySelfServiceProcessingTimeInMinutes);
+        $result = new TerminalSettings();
+        $result->setAverageDeliveryProcessingTimeInMinutes((int) $xml->averageDeliveryProcessingTimeInMinutes);
+        $result->setAverageDSSPTInMinutes((int) $xml->averageDeliverySelfServiceProcessingTimeInMinutes);
+
         return $result;
     }
 
     public function jsonSerialize(): mixed
     {
         return [
-            'averageDeliveryProcessingTimeInMinutes' => $this->getAverageDeliveryProcessingTimeInMinutes(),
+            'averageDeliveryProcessingTimeInMinutes'            => $this->getAverageDeliveryProcessingTimeInMinutes(),
             'averageDeliverySelfServiceProcessingTimeInMinutes' => $this->getAverageDSSPTInMinutes(),
         ];
     }

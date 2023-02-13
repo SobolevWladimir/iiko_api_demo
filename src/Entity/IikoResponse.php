@@ -14,9 +14,9 @@ class IikoResponse implements \JsonSerializable
 
     private string $resultStatus;
 
-   //TODO: пока не стал парсить
-   // private  string $stackTrace;
-   // private  string $entitiesUpdate;
+    // TODO: пока не стал парсить
+    // private  string $stackTrace;
+    // private  string $entitiesUpdate;
 
     private LicenseInfo $licenseInfo;
 
@@ -25,10 +25,11 @@ class IikoResponse implements \JsonSerializable
         $result = new IikoResponse();
         $parse = new \SimpleXMLElement($xml);
         $result->setReturnValue($parse->returnValue);
-        $result->setSuccess((string)$parse->success);
-        $result->setErrorString((string)$parse->errorString);
-        $result->setResultStatus((string)$parse->resultStatus);
+        $result->setSuccess((string) $parse->success);
+        $result->setErrorString((string) $parse->errorString);
+        $result->setResultStatus((string) $parse->resultStatus);
         $result->setLicenseInfo(LicenseInfo::fromXml($parse->licenseInfo));
+
         return $result;
     }
 
@@ -36,11 +37,11 @@ class IikoResponse implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'returnValue' => $this->getReturnValue(),
-            'success' => $this->getSuccess(),
-            'errorString' => $this->getErrorString(),
+            'returnValue'  => $this->getReturnValue(),
+            'success'      => $this->getSuccess(),
+            'errorString'  => $this->getErrorString(),
             'resultStatus' => $this->getResultStatus(),
-            'licenseInfo' => $this->getLicenseInfo(),
+            'licenseInfo'  => $this->getLicenseInfo(),
         ];
     }
 

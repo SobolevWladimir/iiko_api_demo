@@ -31,53 +31,56 @@ class DeliveryTerminal implements \JsonSerializable
     public static function fromXML(\SimpleXMLElement $xml): DeliveryTerminal
     {
         $result = new DeliveryTerminal();
-        $attributes  = $xml->attributes();
+        $attributes = $xml->attributes();
         $eid = '';
         if ($attributes !== null && $attributes->eid !== null) {
-            $eid = (string)$attributes->eid;
+            $eid = (string) $attributes->eid;
         }
         $result->setEid($eid);
-        $result->setRevision($xml->revision !== null ? (string)$xml->revision : '');
-        $result->setTerminal($xml->terminal !== null ? (string)$xml->terminal : '');
-        $result->setRegistered($xml->registered == "true");
-        $result->setDeleted($xml->deleted == "true");
-        $result->setName((string)$xml->name);
-        $result->setDepartmentEntityId((string)$xml->departmentEntityId);
-        $result->setGroupId((string)$xml->groupId);
+        $result->setRevision($xml->revision !== null ? (string) $xml->revision : '');
+        $result->setTerminal($xml->terminal !== null ? (string) $xml->terminal : '');
+        $result->setRegistered($xml->registered == 'true');
+        $result->setDeleted($xml->deleted == 'true');
+        $result->setName((string) $xml->name);
+        $result->setDepartmentEntityId((string) $xml->departmentEntityId);
+        $result->setGroupId((string) $xml->groupId);
         $result->setTerminalSettings(TerminalSettings::fromXML($xml->terminalSettings));
-        $result->setFullRMSVersion((string)$xml->fullRMSVersion);
-        $result->setProtocolVersion((string)$xml->protocolVersion);
+        $result->setFullRMSVersion((string) $xml->fullRMSVersion);
+        $result->setProtocolVersion((string) $xml->protocolVersion);
+
         return $result;
     }
 
     /**
      * @param IikoResponse $response
+     *
      * @return DeliveryTerminal[]
      */
     public static function fromIIKOResponse(IikoResponse $response): array
     {
-        $result  = [];
-        $xml  = $response->getReturnValue();
+        $result = [];
+        $xml = $response->getReturnValue();
         foreach ($xml->i as $item) {
             $result[] = self::fromXML($item);
         }
+
         return $result;
     }
 
     public function jsonSerialize(): mixed
     {
         return [
-          'eid' => $this->getEid(),
-          'revision' => $this->getRevision(),
-          'terminal' => $this->getTerminal(),
-          'registered' => $this->getRegistered(),
-          'deleted' => $this->getDeleted(),
-          'name' => $this->getName(),
+          'eid'                => $this->getEid(),
+          'revision'           => $this->getRevision(),
+          'terminal'           => $this->getTerminal(),
+          'registered'         => $this->getRegistered(),
+          'deleted'            => $this->getDeleted(),
+          'name'               => $this->getName(),
           'departmentEntityId' => $this->getDepartmentEntityId(),
-          'groupId' => $this->getGroupId(),
-          'terminalSettings' => $this->getTerminalSettings(),
-          'fullRMSVersion' => $this->getFullRMSVersion(),
-          'protocolVersion' => $this->getProtocolVersion(),
+          'groupId'            => $this->getGroupId(),
+          'terminalSettings'   => $this->getTerminalSettings(),
+          'fullRMSVersion'     => $this->getFullRMSVersion(),
+          'protocolVersion'    => $this->getProtocolVersion(),
         ];
     }
 

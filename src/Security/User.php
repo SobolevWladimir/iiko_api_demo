@@ -12,7 +12,7 @@ class User implements JWTUserInterface
     #[OA\Property(type: 'string')]
     private string $login;
 
-    /** @var string[] $roles */
+    /** @var string[] */
     private array $roles = [];
 
     /**
@@ -40,6 +40,7 @@ class User implements JWTUserInterface
     public function setLogin(string $login): self
     {
         $this->login = $login;
+
         return $this;
     }
 
@@ -51,9 +52,9 @@ class User implements JWTUserInterface
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
         return $this;
     }
-
 
     /**
      * A visual identifier that represents this user.
@@ -79,11 +80,13 @@ class User implements JWTUserInterface
 
     /**
      * @param string[] $roles
+     *
      * @return User
      */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -121,21 +124,22 @@ class User implements JWTUserInterface
         $this->version = $version;
     }
 
-
     /**
      * @param string $username
      * @param mixed[] $payload
+     *
      * @return User
      */
     public static function createFromPayload($username, array $payload): User
     {
-        $user  = new User();
+        $user = new User();
         $user->setLogin($username);
         $user->setUrl($payload['url']);
         $user->setPassword($payload['password']);
         $user->setVersion($payload['version']);
         $user->setStateHash($payload['state-hash']);
         $user->setLicenseHash($payload['license-hash']);
+
         return $user;
     }
 

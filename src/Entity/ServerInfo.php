@@ -76,11 +76,12 @@ class ServerInfo
     {
         $parse = new \SimpleXMLElement($xml);
         $result = new ServerInfo();
-        $result->setServerName((string)$parse->serverName);
-        $result->setEdition((string)$parse->edition);
-        $result->setVersion((string)$parse->version);
-        $result->setComputerName((string)$parse->computerName);
-        $result->setServerState((string)$parse->serverState);
+        $result->setServerName((string) $parse->serverName);
+        $result->setEdition((string) $parse->edition);
+        $result->setVersion((string) $parse->version);
+        $result->setComputerName((string) $parse->computerName);
+        $result->setServerState((string) $parse->serverState);
+
         return $result;
     }
 }
