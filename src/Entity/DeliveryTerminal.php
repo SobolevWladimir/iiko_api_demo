@@ -70,17 +70,17 @@ class DeliveryTerminal implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-          'eid' => $this->getEid(),
-          'revision' => $this->getRevision(),
-          'terminal' => $this->getTerminal(),
-          'registered' => $this->getRegistered(),
-          'deleted' => $this->getDeleted(),
-          'name' => $this->getName(),
+          'eid'                => $this->getEid(),
+          'revision'           => $this->getRevision(),
+          'terminal'           => $this->getTerminal(),
+          'registered'         => $this->getRegistered(),
+          'deleted'            => $this->getDeleted(),
+          'name'               => $this->getName(),
           'departmentEntityId' => $this->getDepartmentEntityId(),
-          'groupId' => $this->getGroupId(),
-          'terminalSettings' => $this->getTerminalSettings(),
-          'fullRMSVersion' => $this->getFullRMSVersion(),
-          'protocolVersion' => $this->getProtocolVersion(),
+          'groupId'            => $this->getGroupId(),
+          'terminalSettings'   => $this->getTerminalSettings(),
+          'fullRMSVersion'     => $this->getFullRMSVersion(),
+          'protocolVersion'    => $this->getProtocolVersion(),
         ];
     }
 

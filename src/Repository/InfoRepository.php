@@ -59,14 +59,14 @@ class InfoRepository extends BaseRepository
         $path = '/services/authorization?methodName=getCurrentFingerPrints';
         $url = $user->getUrl() . $path;
         $xmlData = [
-            'entities-version' => -1,
-            'client-type' => 'BACK',
-            'enable-warnings' => 'false',
-            'client-call-id' => $uuid,
-            'license-hash' => '0',
-            'restrictions-state-hash' => '0',
+            'entities-version'                 => -1,
+            'client-type'                      => 'BACK',
+            'enable-warnings'                  => 'false',
+            'client-call-id'                   => $uuid,
+            'license-hash'                     => '0',
+            'restrictions-state-hash'          => '0',
             'obtained-license-connections-ids' => '',
-            'use-raw-entities' => 'true',
+            'use-raw-entities'                 => 'true',
         ];
         $xml = new \SimpleXMLElement('<args/>');
         foreach ($xmlData as $key => $value) {
@@ -77,7 +77,7 @@ class InfoRepository extends BaseRepository
         $header = $this->getRequestHeader($user, $uuid);
         $response = $this->client->request('POST', $url, [
           'headers' => $header,
-          'body' => $body,
+          'body'    => $body,
         ]);
         $statusCode = $response->getStatusCode();
         if ($statusCode != 200) {

@@ -124,7 +124,7 @@ test-phpcsfixer:
 	$(call tcStart,"Format code by phpcs_fixer")
 	@$(PHPCSFIXER) fix \
 	--dry-run \
-	--diff $(PATH_SRC) \
+	--diff  \
 	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
 
 
@@ -134,6 +134,5 @@ test-phpcsfixer:
 format-phpcsfixer: 
 	$(call tcStart,"Format code by phpcs_fixer")
 	@$(PHPCSFIXER) fix \
-	$(PATH_SRC) \
 	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
 

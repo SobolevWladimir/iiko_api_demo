@@ -37,11 +37,11 @@ class IikoResponse implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'returnValue' => $this->getReturnValue(),
-            'success' => $this->getSuccess(),
-            'errorString' => $this->getErrorString(),
+            'returnValue'  => $this->getReturnValue(),
+            'success'      => $this->getSuccess(),
+            'errorString'  => $this->getErrorString(),
             'resultStatus' => $this->getResultStatus(),
-            'licenseInfo' => $this->getLicenseInfo(),
+            'licenseInfo'  => $this->getLicenseInfo(),
         ];
     }
 

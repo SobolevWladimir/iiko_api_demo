@@ -42,7 +42,7 @@ class DeliveryRepository extends BaseRepository
         $header = $this->getRequestHeader($user, $clientId);
         $response = $this->client->request('POST', $url, [
           'headers' => $header,
-          'body' => $body->asXML(),
+          'body'    => $body->asXML(),
         ]);
         $statusCode = $response->getStatusCode();
         if ($statusCode != 200) {
@@ -76,7 +76,7 @@ class DeliveryRepository extends BaseRepository
         $header = $this->getRequestHeader($user, $clientId);
         $response = $this->client->request('POST', $url, [
           'headers' => $header,
-          'body' => $body->asXML(),
+          'body'    => $body->asXML(),
         ]);
         $statusCode = $response->getStatusCode();
         if ($statusCode != 200) {

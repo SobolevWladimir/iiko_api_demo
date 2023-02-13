@@ -22,7 +22,7 @@ class TerminalSettings implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-            'averageDeliveryProcessingTimeInMinutes' => $this->getAverageDeliveryProcessingTimeInMinutes(),
+            'averageDeliveryProcessingTimeInMinutes'            => $this->getAverageDeliveryProcessingTimeInMinutes(),
             'averageDeliverySelfServiceProcessingTimeInMinutes' => $this->getAverageDSSPTInMinutes(),
         ];
     }

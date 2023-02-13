@@ -34,9 +34,9 @@ class LicenseInfo implements \JsonSerializable
         return [
             'licenseHash' => $this->getLicenseHash(),
             'licenseData' => $this->getLicenseData(),
-            'stateHash' => $this->getStateHash(),
-            'stateData' => $this->getStateData(),
-            'validTill' => $this->getValidTill(),
+            'stateHash'   => $this->getStateHash(),
+            'stateData'   => $this->getStateData(),
+            'validTill'   => $this->getValidTill(),
         ];
     }
 

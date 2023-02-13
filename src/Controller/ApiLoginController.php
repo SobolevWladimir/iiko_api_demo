@@ -63,10 +63,10 @@ class ApiLoginController extends AbstractController
             return new Response('Ошибка авторизации! Попробуйте другой login/password', Response::HTTP_BAD_GATEWAY);
         }
         $payload = [
-            'url' => $user->getUrl(),
-            'password' => $user->getPassword(),
-            'version' => $user->getVersion(),
-            'state-hash' => $fingerPrint->getLicenseInfo()->getStateHash(),
+            'url'          => $user->getUrl(),
+            'password'     => $user->getPassword(),
+            'version'      => $user->getVersion(),
+            'state-hash'   => $fingerPrint->getLicenseInfo()->getStateHash(),
             'license-hash' => $fingerPrint->getLicenseInfo()->getLicenseHash(),
         ];
         $token = $JWTManager->createFromPayload($user, $payload);
@@ -98,11 +98,11 @@ class ApiLoginController extends AbstractController
     public function getUserInfo(#[CurrentUser] User $user): Response
     {
         $result = [
-          'login' => $user->getLogin(),
-          'url' => $user->getUrl(),
-          'version' => $user->getVersion(),
+          'login'        => $user->getLogin(),
+          'url'          => $user->getUrl(),
+          'version'      => $user->getVersion(),
           'license-hash' => $user->getLicenseHash(),
-          'state-hash' => $user->getStateHash(),
+          'state-hash'   => $user->getStateHash(),
         ];
 
         return new JsonResponse($result);
