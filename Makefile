@@ -5,12 +5,13 @@ DOCKER_COMP = docker compose
 PHP_CONT = $(DOCKER_COMP) exec php
 
 # Executables
-PHP      = $(PHP_CONT) php
-COMPOSER = $(PHP_CONT) composer
-SYMFONY  = $(PHP_CONT) bin/console
-PHPSTAN  = $(PHP_CONT) vendor/bin/phpstan
-PHPCS  	 = $(PHP_CONT) vendor/bin/phpcs
-PHPUNIT  = $(PHP_CONT) bin/phpunit
+PHP      		= $(PHP_CONT) php
+COMPOSER 		= $(PHP_CONT) composer
+SYMFONY  		= $(PHP_CONT) bin/console
+PHPSTAN  		= $(PHP_CONT) vendor/bin/phpstan
+PHPCSFIXER  = $(PHP_CONT) vendor/bin/php-cs-fixer
+PHPCS  	 		= $(PHP_CONT) vendor/bin/phpcs
+PHPUNIT  		= $(PHP_CONT) bin/phpunit
 
 # Paths
 PATH_ROOT    = .
@@ -107,14 +108,6 @@ test-phpcs: ##@Testing Check codebase via PHP CodeSniffer
         -p -s
 
 
-test-phpcsfixer: 
-	$(call tcStart,"Format code by phpcs_fixer")
-	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix \
-	--dry-run \
-	--diff $(PATH_SRC) \
-	--config=$(PATH_ROOT)/.php_cs-fixer.php
-
-
 test-composer: ##@Testing Validate "composer.json" and "composer.lock".
 	$(call tcStart,"test-composer: Composer - Basic Diagnose")
 	$(call title,"Composer - Looking for common issues")
@@ -127,10 +120,19 @@ test-composer: ##@Testing Validate "composer.json" and "composer.lock".
 	$(call tcFinish,"test-composer: Composer - Basic Diagnose")
 
 
+test-phpcsfixer: 
+	$(call tcStart,"Format code by phpcs_fixer")
+	@$(PHPCSFIXER) fix \
+	--dry-run \
+	--diff $(PATH_SRC) \
+	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
+
+
+
 ## —— Format ———————————————————————————————————————————————————————————————
 
 format-phpcsfixer: 
 	$(call tcStart,"Format code by phpcs_fixer")
-	@$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix \
-	--config=$(PATH_ROOT)/.php_cs-fixer.php
+	@$(PHPCSFIXER) fix \
+	--config=$(PATH_ROOT)/.php-cs-fixer.dist.php
 

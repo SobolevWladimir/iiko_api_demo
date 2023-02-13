@@ -1,19 +1,16 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    ->in([
-        __DIR__ . '/src',
-        __DIR__ . '/tests'
-    ])
+$finder = (new PhpCsFixer\Finder())
+    ->in(__DIR__)
+    ->exclude('var')
 ;
 
-$config = new PhpCsFixer\Config();
-
-$config ->setRules([
+return (new PhpCsFixer\Config())
+    ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'concat_space'=>['spacing'=>'one'],
         'trim_array_spaces'=>true,
-        'concat_space' => ['spacing' => 'one'],
         'increment_style' => ['style' => 'post'],
         'no_extra_blank_lines' => ['tokens' => [
             'extra',
@@ -22,11 +19,16 @@ $config ->setRules([
             'throw',
             'use',
         ]],
+        'binary_operator_spaces' => [
+          'operators' => [
+              '=>' => 'align_single_space_minimal',
+            ],
+        ],
         'no_superfluous_phpdoc_tags' => false,
         'phpdoc_align' => false,
         'phpdoc_annotation_without_dot' => false,
         'yoda_style' => false
-    ])
-    ->setFinder($finder);
 
-return $config;
+    ])
+    ->setFinder($finder)
+;
