@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
                 dockerfile: Dockerfile
                 ignore: DL3007,DL3018 # Ignore using latest on mlocati/php-extension-installer & version in apk add
     build:
-        name: Docker build
+        name: Project build
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
