@@ -39,6 +39,8 @@ class DeliveryController extends AbstractController
      *         @OA\Items(ref=@Model(type=DeliveryTerminal::class))
      *     )
      * )
+     *
+     * @Security(name="Bearer")
      */
     public function getTerminals(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
@@ -52,10 +54,28 @@ class DeliveryController extends AbstractController
      *
      * @Route("/api/delivery/orders", methods={"GET"})
      *
+     * @OA\Parameter(
+     *     name="datefrom",
+     *     in="query",
+     *     description="Дата от. формат: YYYY-MM-DD",
+     *     required=true,
+     *     @OA\Schema(type="string")
+     * )
+     *
+     * @OA\Parameter(
+     *     name="dateto",
+     *     in="query",
+     *     description="Дата до. формат YYYY-MM-DD",
+     *     required=true,
+     *     @OA\Schema(type="string")
+     * )
+     *
      * @OA\Response(
      *     response=200,
      *     description="Массив с именами файлов",
      * )
+     *
+     * @Security(name="Bearer")
      */
     public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
