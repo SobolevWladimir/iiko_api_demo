@@ -64,13 +64,19 @@ class DeliveryRepository extends BaseRepository
      * @throws ServerExceptionInterface
      * @throws \Exception
      */
-    public function getDeliveryOrders(User $user): IikoResponse
+  public function getDeliveryOrders(User $user, \DateTime $dateFrom , \DateTime $dateTo): IikoResponse
     {
+          
+        $dateFromFormat =$dateFrom->format(\DateTimeInterface::RFC3339_EXTENDED);
+        $dateToFormat =$dateTo->format(\DateTimeInterface::RFC3339_EXTENDED);
         $clientId = $this->generateNewClientId();
         $path = '/services/deliveryOrdersLoading?methodName=getAllDeliveryOrdersBrdData';
         $url = $user->getUrl() . $path;
         $body = $this->getRequestBody($user, $clientId);
         $request = $body->addChild('request');
+        $deliveryOrdersLoadingRequest = $request->addChild('deliveryOrdersLoadingRequest');
+        $deliveryOrdersLoadingRequest->addChild('dateFrom', $dateFromFormat); 
+        $deliveryOrdersLoadingRequest->addChild('dateTo', $dateToFormat); 
         $request->addChild('deliveryTerminalsRevision', '-1');
         $request->addChild('deliveryTerminalsExchangeStatesRevision', '-1');
         $header = $this->getRequestHeader($user, $clientId);
@@ -83,6 +89,7 @@ class DeliveryRepository extends BaseRepository
             throw new \Exception($response->getContent(), $statusCode);
         }
         $res = IikoResponse::fromXml($response->getContent());
+        dump($res->getReturnValue());
 
         return $res;
     }
