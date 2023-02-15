@@ -1,6 +1,6 @@
 # Как работают запросы в iikoServer 
  
-  Любой запрос к серверу должен содержать определенный данные в заголовках и теле запроса. 
+  Любой запрос к серверу должен содержать определенные данные в заголовках и теле запроса. 
 
   ## Заголовок
   
@@ -24,11 +24,11 @@
 
 ## Тело запроса
 
-В замом запросе  данные оформляются в виде  xml , где корневой тег: args. 
+В самом запросе  данные оформляются в виде  xml , где корневой тег: args. 
 
 Теги: 
 
- 1. entities-version: Если нужны все данные то ставим значение в  -1. 
+ 1. entities-version: Если нужны все данные, то ставим значение в  -1. 
 
  2. client-type:  ставим значение  'BACK' 
 
@@ -36,9 +36,9 @@
 
  4. client-call-id: Должно быть равно значению из заголовка  'X-Resto-CorrelationId'
 
- 5. license-hash: Значение получили при авторзизации  по адресу /services/authorization?methodName=getCurrentFingerPrints  
+ 5. license-hash: Значение получили при авторзизации  по адресу: /services/authorization?methodName=getCurrentFingerPrints  
 
- 6. restrictions-state-hash: Значение получили при авторзизации  по адресу /services/authorization?methodName=getCurrentFingerPrints 
+ 6. restrictions-state-hash: Значение получили при авторзизации  по адресу: /services/authorization?methodName=getCurrentFingerPrints 
 
 7. obtained-license-connections-ids: оставим пустое
 
