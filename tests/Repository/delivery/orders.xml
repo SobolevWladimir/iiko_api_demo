@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+  <returnValue>
+    <customersLocalRevision>232338490499237</customersLocalRevision>
+    <streetsLocalRevision>179941669976104</streetsLocalRevision>
+    <customers>
+      <i eid="90685234-2e85-4db4-9fc2-4084bbf33673">
+        <revision>232338</revision>
+        <lastModifyNode null="1"></lastModifyNode>
+        <deleted>false</deleted>
+        <personalDataConsent null="1"></personalDataConsent>
+        <personalDataStatus>PROVIDED</personalDataStatus>
+        <consentDateFrom>2023-02-14T00:00:00.000+04:00</consentDateFrom>
+        <consentDateTo>2053-02-06T00:00:00.000+04:00</consentDateTo>
+        <processingDateFrom null="1"></processingDateFrom>
+        <processingDateTo null="1"></processingDateTo>
+        <name>TestClient</name>
+        <surname null="1"></surname>
+        <nick null="1"></nick>
+        <comment null="1"></comment>
+        <cardNumber null="1"></cardNumber>
+        <discountCardType null="1"></discountCardType>
+        <addresses>
+          <i>
+            <isMainAddress>true</isMainAddress>
+            <house>12</house>
+            <building null="1"></building>
+            <flat null="1"></flat>
+            <entrance null="1"></entrance>
+            <floor null="1"></floor>
+            <doorphone null="1"></doorphone>
+            <additionalInfo null="1"></additionalInfo>
+            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db92">
+              <revision>5900</revision>
+              <lastModifyNode null="1"></lastModifyNode>
+              <name>10-ый Парковый переулок</name>
+              <deleted>false</deleted>
+              <city>d87cc2d6-9940-47c3-acf6-d179d91f743b</city>
+              <externalId>63000007000000100</externalId>
+              <revisionPart>432491682</revisionPart>
+              <timestamp>1641370152</timestamp>
+              <timestampId>b1f9425c-4a98-7f35-017e-0fa35082db93</timestampId>
+            </street>
+            <region null="1"></region>
+            <externalCartographyId null="1"></externalCartographyId>
+            <index null="1"></index>
+          </i>
+        </addresses>
+        <phones>
+          <i>
+            <phoneNumber>+79004053344</phoneNumber>
+            <comment null="1"></comment>
+            <isMain>true</isMain>
+          </i>
+        </phones>
+        <emails></emails>
+        <counteragentInfo null="1"></counteragentInfo>
+        <initialBalance>0E-9</initialBalance>
+        <iikoBizInfo null="1"></iikoBizInfo>
+        <blackListInfo>
+          <inBlackList>false</inBlackList>
+          <blackListReason null="1"></blackListReason>
+        </blackListInfo>
+        <marketingSource null="1"></marketingSource>
+        <dateCreated>2023-02-14T17:22:21.814+04:00</dateCreated>
+        <linkedCounteragent null="1"></linkedCounteragent>
+        <dateLatestSurvey null="1"></dateLatestSurvey>
+        <gender>NOT_SPECIFIED</gender>
+        <birthdate null="1"></birthdate>
+        <receivesOrderStatusNotifications>true</receivesOrderStatusNotifications>
+        <receivesLoyaltySystemNotifications>true</receivesLoyaltySystemNotifications>
+        <receivesPromotionalNotifications>true</receivesPromotionalNotifications>
+        <lastOrderDate null="1"></lastOrderDate>
+        <revisionPart>490499237</revisionPart>
+        <timestamp>1676380941</timestamp>
+        <timestampId>6308f3a9-298d-6b7d-0186-38a0563fccd0</timestampId>
+      </i>
+    </customers>
+    <streets></streets>
+    <deliveryOrdersLoadingResponse>
+      <deliveryOrders>
+        <i eid="23847f7f-51b5-4544-a38e-6f1f26b4f742">
+          <revision>232338</revision>
+          <lastModifyNode null="1"></lastModifyNode>
+          <customer eid="90685234-2e85-4db4-9fc2-4084bbf33673"></customer>
+          <terminalId>89394605-21f4-28b4-0182-a68e6a6cdf5d</terminalId>
+          <deliveryTerminal eid="89394605-21f4-28b4-0182-a68e6a6cdf5d">
+            <revision>181977</revision>
+            <lastModifyNode null="1"></lastModifyNode>
+            <terminal>89394605-21f4-28b4-0182-a68e6a6cdf58</terminal>
+            <conception null="1"></conception>
+            <registered>true</registered>
+            <deleted>false</deleted>
+            <name>myTest: Основная группа</name>
+            <customName></customName>
+            <departmentEntityId>b1f9425c-4a98-7f35-017d-9ee9645d0011</departmentEntityId>
+            <groupId>b1f9425c-4a98-7f35-017d-9ee9645d00cf</groupId>
+            <terminalSettings>
+              <averageDeliveryProcessingTimeInMinutes>60</averageDeliveryProcessingTimeInMinutes>
+              <averageDeliverySelfServiceProcessingTimeInMinutes>15</averageDeliverySelfServiceProcessingTimeInMinutes>
+            </terminalSettings>
+            <fullRMSVersion>7.9.7013.0</fullRMSVersion>
+            <protocolVersion>28</protocolVersion>
+            <clientPriceCategory null="1"></clientPriceCategory>
+            <address null="1"></address>
+            <technicalInformation null="1"></technicalInformation>
+            <timeZoneInfo>
+              <tzId>Asia/Dubai</tzId>
+              <windowsId>Arabian Standard Time</windowsId>
+              <current>
+                <utc>1663061575</utc>
+                <local>2022-09-13T13:32:55</local>
+              </current>
+              <future>
+                <utc>1665653575</utc>
+                <local>2022-10-13T13:32:55</local>
+              </future>
+            </timeZoneInfo>
+          </deliveryTerminal>
+          <sourceId null="1"></sourceId>
+          <movedDeliveryId null="1"></movedDeliveryId>
+          <orderId>1cdde6e0-02fa-4efc-8d5f-9f60551fe8bf</orderId>
+          <deliveryStatus>NEW</deliveryStatus>
+          <phoneNumber>+79004053344</phoneNumber>
+          <customerName>TestClient</customerName>
+          <emailAddress></emailAddress>
+          <comment null="1"></comment>
+          <orderSum>829.000000000</orderSum>
+          <address>
+            <house>12</house>
+            <building null="1"></building>
+            <flat null="1"></flat>
+            <entrance null="1"></entrance>
+            <floor null="1"></floor>
+            <doorphone null="1"></doorphone>
+            <additionalInfo null="1"></additionalInfo>
+            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db92"></street>
+            <region null="1"></region>
+            <externalCartographyId null="1"></externalCartographyId>
+            <index null="1"></index>
+          </address>
+          <deliveryDate>2023-02-14T18:22:19.917+04:00</deliveryDate>
+          <isDeliveryDateSelectedManuallyForExternalOrder null="1"></isDeliveryDateSelectedManuallyForExternalOrder>
+          <problem>
+            <hasProblem>false</hasProblem>
+            <problem null="1"></problem>
+          </problem>
+          <deliveryCancelCause null="1"></deliveryCancelCause>
+          <deliveryCancelComment null="1"></deliveryCancelComment>
+          <deliveryNumber>3619</deliveryNumber>
+          <lastModifyDeliveryNode null="1"></lastModifyDeliveryNode>
+          <orderType>76067ea3-356f-eb93-9d14-1fa00d082c4e</orderType>
+          <isSelfService>false</isSelfService>
+          <courier null="1"></courier>
+          <ecsData null="1"></ecsData>
+          <isCourierSelectedManually>false</isCourierSelectedManually>
+          <deliveryOperator>008c6c5a-e7bf-4475-8a20-57b363dd94f1</deliveryOperator>
+          <conception null="1"></conception>
+          <marketingSource null="1"></marketingSource>
+          <createdTime>2023-02-14T17:19:59.738+04:00</createdTime>
+          <confirmTime>2023-02-14T17:19:59.738+04:00</confirmTime>
+          <printTime null="1"></printTime>
+          <cookingFinishTime null="1"></cookingFinishTime>
+          <billTime null="1"></billTime>
+          <sendTime null="1"></sendTime>
+          <actualTime null="1"></actualTime>
+          <closeTime null="1"></closeTime>
+          <cancelTime null="1"></cancelTime>
+          <forceCloseTime null="1"></forceCloseTime>
+          <lastModifyDate>2023-02-14T17:22:21.847+04:00</lastModifyDate>
+          <predictedCookingCompleteTime null="1"></predictedCookingCompleteTime>
+          <predictedDeliveryTime null="1"></predictedDeliveryTime>
+          <deliveryDurationInMinutes>60</deliveryDurationInMinutes>
+          <sourceKey null="1"></sourceKey>
+          <personsCount>1</personsCount>
+          <splitBetweenPersons>false</splitBetweenPersons>
+          <latitude null="1"></latitude>
+          <longitude null="1"></longitude>
+          <zone null="1"></zone>
+          <indexInCourierRoute null="1"></indexInCourierRoute>
+          <isCustomerAuthorizedInIikoBiz>false</isCustomerAuthorizedInIikoBiz>
+          <opinionComment null="1"></opinionComment>
+          <avgMark null="1"></avgMark>
+          <avgCourierMark null="1"></avgCourierMark>
+          <avgOperatorMark null="1"></avgOperatorMark>
+          <avgFoodMark null="1"></avgFoodMark>
+          <forceClosed>false</forceClosed>
+          <items>
+            <i eid="f129324f-700a-4fcf-96c8-dae04c1d14d8">
+              <revision>232338</revision>
+              <lastModifyNode null="1"></lastModifyNode>
+              <rank>0</rank>
+              <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f742"></deliveryOrder>
+              <amount>1.000000000</amount>
+              <price>499.000000000</price>
+              <pricePredefined>true</pricePredefined>
+              <comboId null="1"></comboId>
+              <comboGroupId null="1"></comboGroupId>
+              <splitted>false</splitted>
+              <orderItemsAggregationId null="1"></orderItemsAggregationId>
+              <mainPiece>true</mainPiece>
+              <product>c1a8fc71-7271-8744-0184-6f908dd99092</product>
+              <size null="1"></size>
+              <sum>499.000000000</sum>
+              <deleted>false</deleted>
+              <comment null="1"></comment>
+              <status>ADDED</status>
+              <deletionMethod null="1"></deletionMethod>
+              <guestId>d6daec69-3e39-47c4-a128-8a04eb4182a3</guestId>
+              <waiter>008c6c5a-e7bf-4475-8a20-57b363dd94f1</waiter>
+              <modifiers></modifiers>
+            </i>
+            <i eid="b1cdfb44-f50a-4b04-9976-85c370099c39">
+              <revision>232338</revision>
+              <lastModifyNode null="1"></lastModifyNode>
+              <rank>1</rank>
+              <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f742"></deliveryOrder>
+              <amount>1.000000000</amount>
+              <price>330.000000000</price>
+              <pricePredefined>true</pricePredefined>
+              <comboId null="1"></comboId>
+              <comboGroupId null="1"></comboGroupId>
+              <splitted>false</splitted>
+              <orderItemsAggregationId null="1"></orderItemsAggregationId>
+              <mainPiece>true</mainPiece>
+              <product>c1a8fc71-7271-8744-0184-6f908dd98e84</product>
+              <size null="1"></size>
+              <sum>330.000000000</sum>
+              <deleted>false</deleted>
+              <comment null="1"></comment>
+              <status>ADDED</status>
+              <deletionMethod null="1"></deletionMethod>
+              <guestId>d6daec69-3e39-47c4-a128-8a04eb4182a3</guestId>
+              <waiter>008c6c5a-e7bf-4475-8a20-57b363dd94f1</waiter>
+              <modifiers></modifiers>
+            </i>
+          </items>
+          <paymentItems>
+            <i cls="CashDeliveryPaymentItem" eid="d4a61066-6bff-493a-b5fc-8ef6db8ab941">
+              <revision>232338</revision>
+              <lastModifyNode null="1"></lastModifyNode>
+              <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f742"></deliveryOrder>
+              <paymentType cls="CashPaymentType">09322f46-578a-d210-add7-eec222a08871</paymentType>
+              <sum>829.000000000</sum>
+              <isPrepay>false</isPrepay>
+              <isPreliminary>true</isPreliminary>
+              <isExternal>false</isExternal>
+              <isProcessedExternally>false</isProcessedExternally>
+              <isFiscalizedExternally>false</isFiscalizedExternally>
+              <additionalData null="1"></additionalData>
+              <chequeAdditionalInfo null="1"></chequeAdditionalInfo>
+              <organizationDetailsInfo null="1"></organizationDetailsInfo>
+            </i>
+          </paymentItems>
+          <guests>
+            <i eid="d6daec69-3e39-47c4-a128-8a04eb4182a3">
+              <revision>232338</revision>
+              <lastModifyNode null="1"></lastModifyNode>
+              <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f742"></deliveryOrder>
+              <name>TestClient</name>
+            </i>
+          </guests>
+          <combos></combos>
+          <opinionMarks></opinionMarks>
+          <discounts></discounts>
+          <appliedManualConditions></appliedManualConditions>
+          <lastVerifiedDeliveryRestrictionsHash>457AFFB807248340B38078E70F107DC6</lastVerifiedDeliveryRestrictionsHash>
+          <lastDefaultTerminalDeliveryDurationInMinutes null="1"></lastDefaultTerminalDeliveryDurationInMinutes>
+          <iikoCard5Coupon null="1"></iikoCard5Coupon>
+          <referrerId null="1"></referrerId>
+          <customApiData null="1"></customApiData>
+        </i>
+      </deliveryOrders>
+      <conflictedOrders></conflictedOrders>
+    </deliveryOrdersLoadingResponse>
+    <deliveryTerminals></deliveryTerminals>
+    <deliveryTerminalsExchangeStates></deliveryTerminalsExchangeStates>
+    <deliveryStopListItems></deliveryStopListItems>
+  </returnValue>
+  <success>true</success>
+  <errorString null="1"></errorString>
+  <resultStatus>SUCCESS</resultStatus>
+  <stackTrace null="1"></stackTrace>
+  <entitiesUpdate null="1"></entitiesUpdate>
+  <licenseInfo>
+    <licenseHash>-888962226</licenseHash>
+    <licenseData null="1"></licenseData>
+    <stateHash>861</stateHash>
+    <stateData null="1"></stateData>
+    <validTill>2023-05-17T17:22:24.054+04:00</validTill>
+  </licenseInfo>
+  <watchDogCheckResults></watchDogCheckResults>
+</result>
