@@ -4,8 +4,45 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryOrders
+class DeliveryOrders implements \ArrayAccess, \Countable
 {
+    protected array $container = [];
+
+    public function __construct($array = null)
+    {
+        if (!is_null($array)) {
+            $this->container = $array;
+        }
+    }
+
+    public function count(): int
+    {
+        return count($this->container);
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return isset($this->container[$offset]);
+    }
+
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->offsetExists($offset) ? $this->container[$offset] : null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        unset($this->container[$offset]);
+    }
 
     public static function fromXML(\SimpleXMLElement $xml): DeliveryOrders
     {

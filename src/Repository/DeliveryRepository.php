@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\DeliveryTerminal;
 use App\Entity\IikoResponse;
+use App\Entity\DeliveryOrders;
 use App\Security\User;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -64,7 +65,7 @@ class DeliveryRepository extends BaseRepository
      * @throws ServerExceptionInterface
      * @throws \Exception
      */
-  public function getDeliveryOrders(User $user, \DateTime $dateFrom , \DateTime $dateTo): IikoResponse
+  public function getDeliveryOrders(User $user, \DateTime $dateFrom , \DateTime $dateTo): DeliveryOrders
     {
           
         $dateFromFormat =$dateFrom->format(\DateTimeInterface::RFC3339_EXTENDED);
@@ -89,8 +90,6 @@ class DeliveryRepository extends BaseRepository
             throw new \Exception($response->getContent(), $statusCode);
         }
         $res = IikoResponse::fromXml($response->getContent());
-        dump($res->getReturnValue());
-
-        return $res;
+        return DeliveryOrders::fromIIKOResponse($res);
     }
 }
