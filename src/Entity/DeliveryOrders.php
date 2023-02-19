@@ -68,12 +68,9 @@ class DeliveryOrders implements \ArrayAccess, \Countable
     }
     public static function fromIIKOResponse(IikoResponse $response): DeliveryOrders
     {
-        $result = [];
+        $result = new DeliveryOrders();
         $xml = $response->getReturnValue();
-        foreach ($xml->deliveryOrdersLoadingResponse->i as $item) {
-            $result[] = self::fromXML($item);
-        }
-
+        self::fromXML($xml);
         return $result;
     }
 }

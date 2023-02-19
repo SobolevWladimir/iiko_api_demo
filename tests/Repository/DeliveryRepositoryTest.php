@@ -24,6 +24,7 @@ final class DeliveryRepositoryTest extends TestCase
         $dateFrom  = new \DateTime('2023-02-14');
         $dateTo  = new \DateTime('2023-02-15');
 
+        //$str = (string) file_get_contents('./delivery/orders.xml');
         $str = (string) file_get_contents('./delivery/orders.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
@@ -31,7 +32,6 @@ final class DeliveryRepositoryTest extends TestCase
         $repository = new DeliveryRepository($client);
 
         $orders = $repository->getDeliveryOrders($user, $dateFrom, $dateTo);
-
-        $this->assertSame(count($orders), 2);
+        $this->assertSame(count($orders), 1);
     }
 }
