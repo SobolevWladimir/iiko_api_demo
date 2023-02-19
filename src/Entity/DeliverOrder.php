@@ -80,4 +80,433 @@ class DeliverOrder
     private PaymentItems $paymentItems; // array
     private string $lastVerifiedDeliveryRestrictionsHash;
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getRevision(): string
+    {
+        return $this->revision;
+    }
+
+    public function setRevision(string $revision): void
+    {
+        $this->revision = $revision;
+    }
+
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(Customer $customer): void
+    {
+        $this->customer = $customer;
+    }
+
+    public function getTerminalId(): string
+    {
+        return $this->terminalId;
+    }
+
+    public function setTerminalId(string $terminalId): void
+    {
+        $this->terminalId = $terminalId;
+    }
+
+    public function getDeliveryTerminal(): DeliveryTerminal
+    {
+        return $this->deliveryTerminal;
+    }
+
+    public function setDeliveryTerminal(DeliveryTerminal $deliveryTerminal): void
+    {
+        $this->deliveryTerminal = $deliveryTerminal;
+    }
+
+    public function getSourceId(): string
+    {
+        return $this->sourceId;
+    }
+
+    public function setSourceId(string $sourceId): void
+    {
+        $this->sourceId = $sourceId;
+    }
+
+    public function getOrderId(): string
+    {
+        return $this->orderId;
+    }
+
+    public function setOrderId(string $orderId): void
+    {
+        $this->orderId = $orderId;
+    }
+
+    public function getDeliveryStatus(): string
+    {
+        return $this->deliveryStatus;
+    }
+
+    public function setDeliveryStatus(string $deliveryStatus): void
+    {
+        $this->deliveryStatus = $deliveryStatus;
+    }
+
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): void
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    public function getCustomerName(): string
+    {
+        return $this->customerName;
+    }
+
+    public function setCustomerName(string $customerName): void
+    {
+        $this->customerName = $customerName;
+    }
+
+    public function getEmailAddress(): string
+    {
+        return $this->emailAddress;
+    }
+
+    public function setEmailAddress(string $emailAddress): void
+    {
+        $this->emailAddress = $emailAddress;
+    }
+
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    public function getOrderSum(): float
+    {
+        return $this->orderSum;
+    }
+
+    public function setOrderSum(float $orderSum): void
+    {
+        $this->orderSum = $orderSum;
+    }
+
+    public function getAddress(): DeliveryAddress
+    {
+        return $this->address;
+    }
+
+    public function setAddress(DeliveryAddress $address): void
+    {
+        $this->address = $address;
+    }
+
+    public function getDeliveryDate(): \DateTime
+    {
+        return $this->deliveryDate;
+    }
+
+    public function setDeliveryDate(\DateTime $deliveryDate): void
+    {
+        $this->deliveryDate = $deliveryDate;
+    }
+
+    public function getDeliveryCancelCause(): string
+    {
+        return $this->deliveryCancelCause;
+    }
+
+    public function setDeliveryCancelCause(string $deliveryCancelCause): void
+    {
+        $this->deliveryCancelCause = $deliveryCancelCause;
+    }
+
+    public function getDeliveryCancelComment(): string
+    {
+        return $this->deliveryCancelComment;
+    }
+
+    public function setDeliveryCancelComment(string $deliveryCancelComment): void
+    {
+        $this->deliveryCancelComment = $deliveryCancelComment;
+    }
+
+    public function getDeliveryNumber(): string
+    {
+        return $this->deliveryNumber;
+    }
+
+    public function setDeliveryNumber(string $deliveryNumber): void
+    {
+        $this->deliveryNumber = $deliveryNumber;
+    }
+
+    public function getLastModifyDeliveryNode(): string
+    {
+        return $this->lastModifyDeliveryNode;
+    }
+
+    public function setLastModifyDeliveryNode(string $lastModifyDeliveryNode): void
+    {
+        $this->lastModifyDeliveryNode = $lastModifyDeliveryNode;
+    }
+
+    public function getOrderType(): string
+    {
+        return $this->orderType;
+    }
+
+    public function setOrderType(string $orderType): void
+    {
+        $this->orderType = $orderType;
+    }
+
+    public function getIsSelfService(): bool
+    {
+        return $this->isSelfService;
+    }
+
+    public function setIsSelfService(bool $isSelfService): void
+    {
+        $this->isSelfService = $isSelfService;
+    }
+
+    public function getIsCourierSelectedManually(): bool
+    {
+        return $this->isCourierSelectedManually;
+    }
+
+    public function setIsCourierSelectedManually(bool $isCourierSelectedManually): void
+    {
+        $this->isCourierSelectedManually = $isCourierSelectedManually;
+    }
+
+    public function getDeliveryOperator(): string
+    {
+        return $this->deliveryOperator;
+    }
+
+    public function setDeliveryOperator(string $deliveryOperator): void
+    {
+        $this->deliveryOperator = $deliveryOperator;
+    }
+
+    public function getCreatedTime(): ?\DateTime
+    {
+        return $this->createdTime;
+    }
+
+    public function setCreatedTime(?\DateTime $createdTime): void
+    {
+        $this->createdTime = $createdTime;
+    }
+
+    public function getConfirmTime(): ?\DateTime
+    {
+        return $this->confirmTime;
+    }
+
+    public function setConfirmTime(?\DateTime $confirmTime): void
+    {
+        $this->confirmTime = $confirmTime;
+    }
+
+    public function getCookingFinishTime(): ?\DateTime
+    {
+        return $this->cookingFinishTime;
+    }
+
+    public function setCookingFinishTime(?\DateTime $cookingFinishTime): void
+    {
+        $this->cookingFinishTime = $cookingFinishTime;
+    }
+
+    public function getBillTime(): ?\DateTime
+    {
+        return $this->billTime;
+    }
+
+    public function setBillTime(?\DateTime $billTime): void
+    {
+        $this->billTime = $billTime;
+    }
+
+    public function getSendTime(): ?\DateTime
+    {
+        return $this->sendTime;
+    }
+
+    public function setSendTime(?\DateTime $sendTime): void
+    {
+        $this->sendTime = $sendTime;
+    }
+
+    public function getActualTime(): ?\DateTime
+    {
+        return $this->actualTime;
+    }
+
+    public function setActualTime(?\DateTime $actualTime): void
+    {
+        $this->actualTime = $actualTime;
+    }
+
+    public function getCloseTime(): ?\DateTime
+    {
+        return $this->closeTime;
+    }
+
+    public function setCloseTime(?\DateTime $closeTime): void
+    {
+        $this->closeTime = $closeTime;
+    }
+
+    public function getCancelTime(): ?\DateTime
+    {
+        return $this->cancelTime;
+    }
+
+    public function setCancelTime(?\DateTime $cancelTime): void
+    {
+        $this->cancelTime = $cancelTime;
+    }
+
+    public function getForceCloseTime(): ?\DateTime
+    {
+        return $this->forceCloseTime;
+    }
+
+    public function setForceCloseTime(?\DateTime $forceCloseTime): void
+    {
+        $this->forceCloseTime = $forceCloseTime;
+    }
+
+    public function getLastModifyDate(): \DateTime
+    {
+        return $this->lastModifyDate;
+    }
+
+    public function setLastModifyDate(\DateTime $lastModifyDate): void
+    {
+        $this->lastModifyDate = $lastModifyDate;
+    }
+
+    public function getPredictedCookingCompleteTime(): ?\DateTime
+    {
+        return $this->predictedCookingCompleteTime;
+    }
+
+    public function setPredictedCookingCompleteTime(?\DateTime $predictedCookingCompleteTime): void
+    {
+        $this->predictedCookingCompleteTime = $predictedCookingCompleteTime;
+    }
+
+    public function getPredictedDeliveryTime(): ?\DateTime
+    {
+        return $this->predictedDeliveryTime;
+    }
+
+    public function setPredictedDeliveryTime(?\DateTime $predictedDeliveryTime): void
+    {
+        $this->predictedDeliveryTime = $predictedDeliveryTime;
+    }
+
+    public function getDeliveryDurationInMinutes(): int
+    {
+        return $this->deliveryDurationInMinutes;
+    }
+
+    public function setDeliveryDurationInMinutes(int $deliveryDurationInMinutes): void
+    {
+        $this->deliveryDurationInMinutes = $deliveryDurationInMinutes;
+    }
+
+    public function getPersonsCount(): int
+    {
+        return $this->personsCount;
+    }
+
+    public function setPersonsCount(int $personsCount): void
+    {
+        $this->personsCount = $personsCount;
+    }
+
+    public function getSplitBetweenPersons(): bool
+    {
+        return $this->splitBetweenPersons;
+    }
+
+    public function setSplitBetweenPersons(bool $splitBetweenPersons): void
+    {
+        $this->splitBetweenPersons = $splitBetweenPersons;
+    }
+
+    public function getIsCustomerAuthorizedInIikoBiz(): bool
+    {
+        return $this->isCustomerAuthorizedInIikoBiz;
+    }
+
+    public function setIsCustomerAuthorizedInIikoBiz(bool $isCustomerAuthorizedInIikoBiz): void
+    {
+        $this->isCustomerAuthorizedInIikoBiz = $isCustomerAuthorizedInIikoBiz;
+    }
+
+    public function getForceClosed(): bool
+    {
+        return $this->forceClosed;
+    }
+
+    public function setForceClosed(bool $forceClosed): void
+    {
+        $this->forceClosed = $forceClosed;
+    }
+
+    public function getItems(): DeliveryProductItems
+    {
+        return $this->items;
+    }
+
+    public function setItems(DeliveryProductItems $items): void
+    {
+        $this->items = $items;
+    }
+
+    public function getPaymentItems(): PaymentItems
+    {
+        return $this->paymentItems;
+    }
+
+    public function setPaymentItems(PaymentItems $paymentItems): void
+    {
+        $this->paymentItems = $paymentItems;
+    }
+
+    public function getLastVerifiedDeliveryRestrictionsHash(): string
+    {
+        return $this->lastVerifiedDeliveryRestrictionsHash;
+    }
+
+    public function setLastVerifiedDeliveryRestrictionsHash(string $lastVerifiedDeliveryRestrictionsHash): void
+    {
+        $this->lastVerifiedDeliveryRestrictionsHash = $lastVerifiedDeliveryRestrictionsHash;
+    }
 }
