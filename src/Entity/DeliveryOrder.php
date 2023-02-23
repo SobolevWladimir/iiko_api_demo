@@ -541,25 +541,25 @@ class DeliveryOrder
         $result->setRevision((string)$xml->revision);
         $customerAttributes = $xml->customer->attributes();
         $result->setCustomerId((string) $customerAttributes->eid);
-        $result->setTerminalId($xml->terminalId);
+        $result->setTerminalId((string)$xml->terminalId);
         $result->setDeliveryTerminal(DeliveryTerminal::fromXML($xml->deliveryTerminal));
-        $result->setSourceId($xml->sourceId);
-        $result->setOrderId($xml->orderId);
-        $result->setDeliveryStatus($xml->deliveryStatus);
-        $result->setPhoneNumber($xml->phoneNumber);
-        $result->setCustomerName($xml->customerName);
-        $result->setEmailAddress($xml->emailAddress);
-        $result->setComment($xml->comment);
-        $result->setOrderSum($xml->orderSum);
+        $result->setSourceId((string)$xml->sourceId);
+        $result->setOrderId((string)$xml->orderId);
+        $result->setDeliveryStatus((string)$xml->deliveryStatus);
+        $result->setPhoneNumber((string)$xml->phoneNumber);
+        $result->setCustomerName((string)$xml->customerName);
+        $result->setEmailAddress((string)$xml->emailAddress);
+        $result->setComment((string)$xml->comment);
+        $result->setOrderSum((float)$xml->orderSum);
         $result->setDeliveryDate(new \DateTime((string) $xml->deliveryDate));
         $result->setDeliveryCancelCause((string) $xml->deliveryCancelCause);
         $result->setDeliveryCancelComment((string) $xml->deliveryCancelComment);
         $result->setDeliveryNumber((string) $xml->deliveryNumber);
         $result->setLastModifyDeliveryNode((string) $xml->lastModifyDeliveryNode);
         $result->setOrderType((string) $xml->orderType);
-        $result->setIsSelfService($xml->isSelfService == 'true');
+        $result->setIsSelfService(self::parseBool($xml->isSelfService));
         $result->setIsCourierSelectedManually(self::parseBool($xml->isCourierSelectedManually));
-        $result->setDeliveryOperator($xml->deliveryOperator);
+        $result->setDeliveryOperator((string)$xml->deliveryOperator);
         $result->setCreatedTime(self::parseTime($xml->createdTime));
         $result->setConfirmTime(self::parseTime($xml->confirmTime));
         $result->setCookingFinishTime(self::parseTime($xml->cookingFinishTime));
@@ -581,7 +581,7 @@ class DeliveryOrder
         $result->setAddress(DeliveryAddress::fromXML($xml->address));
         $result->setItems(DeliveryProductItems::fromXML($xml->items));
         $result->setPaymentItems(PaymentItems::fromXML($xml->paymentItems));
-        $result->setLastVerifiedDeliveryRestrictionsHash($xml->lastVerifiedDeliveryRestrictionsHash);
+        $result->setLastVerifiedDeliveryRestrictionsHash((string)$xml->lastVerifiedDeliveryRestrictionsHash);
 
         return $result;
     }

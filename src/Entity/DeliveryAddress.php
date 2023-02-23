@@ -100,15 +100,14 @@ class DeliveryAddress
   public static function fromXml(\SimpleXMLElement $xml): DeliveryAddress
   {
       $result = new DeliveryAddress();
-      $result->setHouse($xml->house);
-      $result->setBuilding($xml->building);
-      $result->setFlat($xml->flat);
-      $result->setEntrance($xml->entrance);
-      $result->setFloor($xml->floor);
-      $result->setDoorphone($xml->doorphone);
-      $result->setStreet($xml->street);
-      $result->setRegion($xml->region);
-
+      $result->setHouse((string)$xml->house);
+      $result->setBuilding((string)$xml->building);
+      $result->setFlat((string)$xml->flat);
+      $result->setEntrance((string)$xml->entrance);
+      $result->setFloor((string)$xml->floor);
+      $result->setDoorphone((string)$xml->doorphone);
+      $result->setStreet((string)$xml->street);
+      $result->setRegion((string)$xml->region);
       return $result;
   }
 }

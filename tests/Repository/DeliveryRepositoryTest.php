@@ -36,11 +36,10 @@ final class DeliveryRepositoryTest extends TestCase
 
         $orders = $repository->getDeliveryOrders($user, $dateFrom, $dateTo);
         $this->assertSame(count($orders), 1);
-        $order= $orders->at(0);
+        $order = $orders->at(0);
         $this->assertSame($order->getRevision(), '232338');
         $this->assertSame($order->getCustomerId(), '90685234-2e85-4db4-9fc2-400000000073');
-    $this->assertSame($order->getTerminalId(), '89394605-21f4-28b4-0182-a68e6a6cdf0d');
-    $this->assertSame($order->getDeliveryTerminal()->getEid(),'89394605-21f4-28b4-0182-a68e6a6cdf0d');
-        
+        $this->assertSame($order->getTerminalId(), '89394605-21f4-28b4-0182-a68e6a6cdf0d');
+        $this->assertSame($order->getDeliveryTerminal()->getEid(), '89394605-21f4-28b4-0182-a68e6a6cdf0d');
     }
 }
