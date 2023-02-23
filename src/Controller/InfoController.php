@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use OpenApi\Annotations as OA;
 use App\Security\User;
 use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
@@ -20,10 +20,12 @@ class InfoController
      * Получаем список ссылок доступных для скачивания на сервере.
      *
      * @Route("/api/info/links", methods={"GET"})
+     *
      * @OA\Parameter(
      *     name="order",
      *     in="query",
      *     description="The field used to order rewards",
+     *
      *     @OA\Schema(type="string")
      * )
      *
@@ -36,9 +38,9 @@ class InfoController
      */
     public function links(#[CurrentUser] User $user): JsonResponse
     {
-         $host = $user->getUrl(); 
-        $link  = ['office'=>"$host/update/BackOffice/Setup.RMS.BackOffice.exe"]; 
+        $host = $user->getUrl();
+        $link = ['office' => "$host/update/BackOffice/Setup.RMS.BackOffice.exe"];
+
         return new JsonResponse($link);
     }
-
 }

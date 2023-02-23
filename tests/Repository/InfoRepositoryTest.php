@@ -35,7 +35,7 @@ final class InfoRepositoryTest extends TestCase
      */
     public function testCheckServerInfo(User $user): void
     {
-        $str = (string) file_get_contents(__DIR__.'/info/server_info.xml');
+        $str = (string) file_get_contents(__DIR__ . '/info/server_info.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
         ]);

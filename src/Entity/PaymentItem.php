@@ -8,12 +8,12 @@ class PaymentItem
 {
     private string $id;
     private int $revision;
-  // lastModifyNode
-  // deliveryOrder
-  // paymentType;
-  // additionalData
-  // chequeAdditionalInfo
-  // organizationDetailsInfo
+    // lastModifyNode
+    // deliveryOrder
+    // paymentType;
+    // additionalData
+    // chequeAdditionalInfo
+    // organizationDetailsInfo
     private float $sum;
     private bool $isPrepay;
     private bool $isPreliminary;

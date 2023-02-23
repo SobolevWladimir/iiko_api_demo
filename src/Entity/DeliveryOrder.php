@@ -6,39 +6,39 @@ namespace App\Entity;
 
 class DeliveryOrder
 {
+    // Не распарсенные переменные
+    // private string $movedDeliveryId;
+    // private string isDeliveryDateSelectedManuallyForExternalOrder  ;
+    // private DeliveryProblem $problem;
+    // private Courier $courier;
+    // private string $ecsData;
+    // private string $conception;
+    // private string $marketingSource;
+    // private string $printTime;
+    // private string $sourceKey;
+    // private string $latitude;
+    // private string $longitude;
+    // private string $zone;
+    // private string $indexInCourierRoute;
+    // private string $opinionComment;
+    // private string $avgMark;
+    // private string $avgCourierMark;
+    // private string $avgOperatorMark;
+    // private string $avgFoodMark;
+    // private ?DeliveryCombos $combos;
+    // private string $opinionMarks;
+    // private string $discounts;
+    // private string $appliedManualConditions;
+    // private string $lastDefaultTerminalDeliveryDurationInMinutes;
+    // private string $iikoCard5Coupon;
+    // private string $referrerId;
+    // private string $customApiData;
+    // private DeliveryGuests $guests;
 
-  // Не распарсенные переменные
-  // private string $movedDeliveryId;
-  // private string isDeliveryDateSelectedManuallyForExternalOrder  ;
-  // private DeliveryProblem $problem;
-  // private Courier $courier;
-  // private string $ecsData;
-  // private string $conception;
-  // private string $marketingSource;
-  // private string $printTime;
-  // private string $sourceKey;
-  // private string $latitude;
-  // private string $longitude;
-  // private string $zone;
-  // private string $indexInCourierRoute;
-  // private string $opinionComment;
-  // private string $avgMark;
-  // private string $avgCourierMark;
-  // private string $avgOperatorMark;
-  // private string $avgFoodMark;
-  // private ?DeliveryCombos $combos;
-  // private string $opinionMarks;
-  // private string $discounts;
-  // private string $appliedManualConditions;
-  // private string $lastDefaultTerminalDeliveryDurationInMinutes;
-  // private string $iikoCard5Coupon;
-  // private string $referrerId;
-  // private string $customApiData;
-  //private DeliveryGuests $guests;
-  
     private string $id;
     private string $revision;
-    private Customer $customer;
+    private ?Customer $customer;
+    private string $customerId;
     private string $terminalId;
     private DeliveryTerminal $deliveryTerminal;
     private string $sourceId;
@@ -100,12 +100,12 @@ class DeliveryOrder
         $this->revision = $revision;
     }
 
-    public function getCustomer(): Customer
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
 
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(?Customer $customer): void
     {
         $this->customer = $customer;
     }
@@ -508,5 +508,91 @@ class DeliveryOrder
     public function setLastVerifiedDeliveryRestrictionsHash(string $lastVerifiedDeliveryRestrictionsHash): void
     {
         $this->lastVerifiedDeliveryRestrictionsHash = $lastVerifiedDeliveryRestrictionsHash;
+    }
+
+    private static function parseTime(mixed $time): ?\DateTime
+    {
+        if ($time == null) {
+            return null;
+        }
+
+        return new \DateTime((string) $time);
+    }
+
+    private static function parseBool(mixed $value): bool
+    {
+        if ($value == null) {
+            return false;
+        }
+
+        return (string) $value == 'true';
+    }
+
+    public static function fromXML(\SimpleXMLElement $xml): DeliveryOrder
+    {
+        $result = new DeliveryOrder();
+
+        $attributes = $xml->attributes();
+        $eid = '';
+        if ($attributes !== null && $attributes->eid !== null) {
+            $eid = (string) $attributes->eid;
+        }
+        $result->setId($eid);
+        $result->setRevision((string)$xml->revision);
+        // $customerAttributes = $xml->customer->attributes();
+        // $result->setCustomerId((string) $customerAttributes->eid);
+        // $result->setTerminalId($xml->terminalId);
+        // $result->setDeliveryTerminal(DeliveryTerminal::fromXML($xml->deliveryTerminal));
+        // $result->setSourceId($xml->sourceId);
+        // $result->setOrderId($xml->orderId);
+        // $result->setDeliveryStatus($xml->deliveryStatus);
+        // $result->setPhoneNumber($xml->phoneNumber);
+        // $result->setCustomerName($xml->customerName);
+        // $result->setEmailAddress($xml->emailAddress);
+        // $result->setComment($xml->comment);
+        // $result->setOrderSum($xml->orderSum);
+        // $result->setDeliveryDate(new \DateTime((string) $xml->deliveryDate));
+        // $result->setDeliveryCancelCause((string) $xml->deliveryCancelCause);
+        // $result->setDeliveryCancelComment((string) $xml->deliveryCancelComment);
+        // $result->setDeliveryNumber((string) $xml->deliveryNumber);
+        // $result->setLastModifyDeliveryNode((string) $xml->lastModifyDeliveryNode);
+        // $result->setOrderType((string) $xml->orderType);
+        // $result->setIsSelfService($xml->isSelfService == 'true');
+        // $result->setIsCourierSelectedManually(self::parseBool($xml->isCourierSelectedManually));
+        // $result->setDeliveryOperator($xml->deliveryOperator);
+        // $result->setCreatedTime(self::parseTime($xml->createdTime));
+        // $result->setConfirmTime(self::parseTime($xml->confirmTime));
+        // $result->setCookingFinishTime(self::parseTime($xml->cookingFinishTime));
+        // $result->setBillTime(self::parseTime($xml->billTime));
+        // $result->setSendTime(self::parseTime($xml->sendTime));
+        // $result->setActualTime(self::parseTime($xml->actualTime));
+        // $result->setCloseTime(self::parseTime($xml->closeTime));
+        // $result->setCancelTime(self::parseTime($xml->cancelTime));
+        // $result->setForceCloseTime(self::parseTime($xml->forceCloseTime));
+        // $lastModifyDate = self::parseTime($xml->lastModifyDate);
+        // $result->setLastModifyDate($lastModifyDate);
+        // $result->setPredictedCookingCompleteTime(self::parseTime($xml->predictedCookingCompleteTime));
+        // $result->setPredictedDeliveryTime(self::parseTime($xml->predictedDeliveryTime));
+        // $result->setDeliveryDurationInMinutes((int) $xml->deliveryDurationInMinutes);
+        // $result->setPersonsCount((int) $xml->personsCount);
+        // $result->setSplitBetweenPersons(self::parseBool($xml->splitBetweenPersons));
+        // $result->setIsCustomerAuthorizedInIikoBiz(self::parseBool($xml->isCustomerAuthorizedInIikoBiz));
+        // $result->setForceClosed(self::parseBool($xml->forceClosed));
+        // $result->setAddress(DeliveryAddress::fromXML($xml->address));
+        // $result->setItems(DeliveryProductItems::fromXML($xml->items));
+        // $result->setPaymentItems(PaymentItems::fromXML($xml->paymentItems));
+        // $result->setLastVerifiedDeliveryRestrictionsHash($xml->lastVerifiedDeliveryRestrictionsHash);
+
+        return $result;
+    }
+
+    public function getCustomerId(): string
+    {
+        return $this->customerId;
+    }
+
+    public function setCustomerId(string $customerId): void
+    {
+        $this->customerId = $customerId;
     }
 }

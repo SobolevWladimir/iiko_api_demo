@@ -1,22 +1,21 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
-class DeliveryAddress {
-  private ?string $house;
-  private ?string $building;
-  private ?string $flat;
-  private ?string $entrance;
-  private ?string $floor;
-  private ?string $doorphone;
-  // private string $additionalInfo;
-  private ?string $street;
-  private ?string $region;
-  // private ?string $externalCartographyId;
-
+class DeliveryAddress
+{
+    private ?string $house;
+    private ?string $building;
+    private ?string $flat;
+    private ?string $entrance;
+    private ?string $floor;
+    private ?string $doorphone;
+    // private string $additionalInfo;
+    private ?string $street;
+    private ?string $region;
+    // private ?string $externalCartographyId;
 
     public function getHouse(): ?string
     {
@@ -97,4 +96,19 @@ class DeliveryAddress {
     {
         $this->region = $region;
     }
-} 
+
+  public static function fromXml(\SimpleXMLElement $xml): DeliveryAddress
+  {
+      $result = new DeliveryAddress();
+      $result->setHouse($xml->house);
+      $result->setBuilding($xml->building);
+      $result->setFlat($xml->flat);
+      $result->setEntrance($xml->entrance);
+      $result->setFloor($xml->floor);
+      $result->setDoorphone($xml->doorphone);
+      $result->setStreet($xml->street);
+      $result->setRegion($xml->region);
+
+      return $result;
+  }
+}

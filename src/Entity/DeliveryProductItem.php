@@ -6,22 +6,22 @@ namespace App\Entity;
 
 class DeliveryProductItem
 {
-  // Не распарсенные переменные
-  // lastModifyNode
-  // rank;
-  // deliveryOrder;
-  // comboId
-  // comboGroupId;
-  // splitted
-  // orderItemsAggregationId
-  // private bool $mainPiece;
-  // size;
-  // comment
-  // deletionMethod
-  // guestId;
-  // waiter;
-  // modifiers
-   
+    // Не распарсенные переменные
+    // lastModifyNode
+    // rank;
+    // deliveryOrder;
+    // comboId
+    // comboGroupId;
+    // splitted
+    // orderItemsAggregationId
+    // private bool $mainPiece;
+    // size;
+    // comment
+    // deletionMethod
+    // guestId;
+    // waiter;
+    // modifiers
+
     private string $id;
     private int $revision;
     private float $amount;

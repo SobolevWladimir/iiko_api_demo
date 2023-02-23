@@ -21,14 +21,14 @@ final class DeliveryRepositoryTest extends TestCase
         $user->setLicenseHash('');
         $user->setStateHash('');
         $user->setVersion('8.2.7014.0');
-        $dateFrom  = new \DateTime('2023-02-14');
-        $dateTo  = new \DateTime('2023-02-15');
+        $dateFrom = new \DateTime('2023-02-14');
+        $dateTo = new \DateTime('2023-02-15');
 
         $files = scandir(__DIR__);
         foreach ($files as $file) {
             echo $file . "\n";
         }
-        $str = (string) file_get_contents(__DIR__.'/delivery/orders.xml');
+        $str = (string) file_get_contents(__DIR__ . '/delivery/orders.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
         ]);

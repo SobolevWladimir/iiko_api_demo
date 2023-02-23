@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\DeliveryOrders;
 use App\Entity\DeliveryTerminal;
 use App\Entity\IikoResponse;
-use App\Entity\DeliveryOrders;
 use App\Security\User;
-use DateTime;
-use Exception;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -57,19 +55,20 @@ class DeliveryRepository extends BaseRepository
     }
 
     /**
-     * @param User $user 
-     * @param DateTime $dateFrom 
-     * @param DateTime $dateTo 
-     * @return DeliveryOrders 
-     * @throws TransportExceptionInterface 
-     * @throws RedirectionExceptionInterface 
-     * @throws ClientExceptionInterface 
-     * @throws ServerExceptionInterface 
-     * @throws Exception 
+     * @param User $user
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     *
+     * @return DeliveryOrders
+     *
+     * @throws TransportExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws \Exception
      */
     public function getDeliveryOrders(User $user, \DateTime $dateFrom, \DateTime $dateTo): DeliveryOrders
     {
-
         $dateFromFormat = $dateFrom->format(\DateTimeInterface::RFC3339_EXTENDED);
         $dateToFormat = $dateTo->format(\DateTimeInterface::RFC3339_EXTENDED);
         $clientId = $this->generateNewClientId();
@@ -92,6 +91,7 @@ class DeliveryRepository extends BaseRepository
             throw new \Exception($response->getContent(), $statusCode);
         }
         $res = IikoResponse::fromXml($response->getContent());
+
         return DeliveryOrders::fromIIKOResponse($res);
     }
 }

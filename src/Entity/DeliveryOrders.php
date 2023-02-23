@@ -4,15 +4,44 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryOrders implements \ArrayAccess, \Countable
+class DeliveryOrders implements \Countable, \Iterator
 {
+    /** @var DeliveryOrder[] * */
     protected array $container = [];
+
+    private $positon = 0;
 
     public function __construct($array = null)
     {
         if (!is_null($array)) {
             $this->container = $array;
         }
+        $this->positon = 0;
+    }
+
+    public function current(): mixed
+    {
+        return $this->container[$this->positon];
+    }
+
+    public function next(): void
+    {
+        $this->position++;
+    }
+
+    public function key(): mixed
+    {
+        return $this->positon;
+    }
+
+    public function valid(): bool
+    {
+        return isset($this->container[$this->position]);
+    }
+
+    public function rewind(): void
+    {
+        $this->positon = 0;
     }
 
     public function count(): int
@@ -20,57 +49,36 @@ class DeliveryOrders implements \ArrayAccess, \Countable
         return count($this->container);
     }
 
-    public function offsetExists(mixed $offset): bool
+    public function add(DeliveryOrder $order)
     {
-        return isset($this->container[$offset]);
+        $this->container[] = $order;
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function at($index): DeliveryOrder
     {
-        return $this->offsetExists($offset) ? $this->container[$offset] : null;
-    }
-
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        if (is_null($offset)) {
-            $this->container[] = $value;
-        } else {
-            $this->container[$offset] = $value;
-        }
-    }
-
-    public function offsetUnset(mixed $offset): void
-    {
-        unset($this->container[$offset]);
+        return $this->container[$index];
     }
 
     public static function fromXML(\SimpleXMLElement $xml): DeliveryOrders
     {
-         $result = new DeliveryOrders();
-        // $attributes = $xml->attributes();
-        // $eid = '';
-        // if ($attributes !== null && $attributes->eid !== null) {
-        //     $eid = (string) $attributes->eid;
-        // }
-        // $result->setEid($eid);
-        // $result->setRevision($xml->revision !== null ? (string) $xml->revision : '');
-        // $result->setTerminal($xml->terminal !== null ? (string) $xml->terminal : '');
-        // $result->setRegistered($xml->registered == 'true');
-        // $result->setDeleted($xml->deleted == 'true');
-        // $result->setName((string) $xml->name);
-        // $result->setDepartmentEntityId((string) $xml->departmentEntityId);
-        // $result->setGroupId((string) $xml->groupId);
-        // $result->setTerminalSettings(TerminalSettings::fromXML($xml->terminalSettings));
-        // $result->setFullRMSVersion((string) $xml->fullRMSVersion);
-        // $result->setProtocolVersion((string) $xml->protocolVersion);
+        $result = new DeliveryOrders();
+        // парсинг  customers
+
+        // парсим  delivery orders
+        foreach ($xml->deliveryOrdersLoadingResponse->deliveryOrders->i as $deliveryOrder) {
+            $item = DeliveryOrder::fromXML($deliveryOrder);
+            $result->add($item);
+        }
 
         return $result;
     }
+
     public static function fromIIKOResponse(IikoResponse $response): DeliveryOrders
     {
         $result = new DeliveryOrders();
         $xml = $response->getReturnValue();
         self::fromXML($xml);
+
         return $result;
     }
 }
