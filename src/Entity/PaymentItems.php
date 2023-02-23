@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class PaymentItems implements \Countable, \Iterator
+class PaymentItems implements \Countable, \Iterator, \JsonSerializable
 {
     /** @var PaymentItem[] * */
     protected array $container = [];
@@ -65,6 +65,17 @@ class PaymentItems implements \Countable, \Iterator
         foreach ($xml->i as $item) {
             $result->add(PaymentItem::fromXML($item));
         }
+
+        return $result;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        $result = [];
+        foreach ($this->container as $item) {
+            $result[] = $item->jsonSerialize();
+        }
+
         return $result;
     }
 }

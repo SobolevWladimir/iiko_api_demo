@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class PaymentItem
+class PaymentItem implements \JsonSerializable
 {
     // lastModifyNode
     // deliveryOrder
@@ -112,6 +112,12 @@ class PaymentItem
         $result->setIsPrepay(IikoResponse::parseBool($xml->isExternal));
         $result->setIsPrepay(IikoResponse::parseBool($xml->isProcessedExternally));
         $result->setIsPrepay(IikoResponse::parseBool($xml->isFiscalizedExternally));
+
         return $result;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
     }
 }

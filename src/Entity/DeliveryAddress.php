@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryAddress
+class DeliveryAddress implements \JsonSerializable
 {
     private ?string $house;
     private ?string $building;
@@ -13,10 +13,15 @@ class DeliveryAddress
     private ?string $floor;
     private ?string $doorphone;
     // private string $additionalInfo;
-    private ?string $street;
-    private ?string $streetId;
-    private ?string $region;
+    // private string StreetId;
     // private ?string $externalCartographyId;
+    private ?string $street;
+    private ?string $region;
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
+    }
 
     public function getHouse(): ?string
     {
@@ -101,14 +106,15 @@ class DeliveryAddress
     public static function fromXml(\SimpleXMLElement $xml): DeliveryAddress
     {
         $result = new DeliveryAddress();
-        $result->setHouse((string)$xml->house);
-        $result->setBuilding((string)$xml->building);
-        $result->setFlat((string)$xml->flat);
-        $result->setEntrance((string)$xml->entrance);
-        $result->setFloor((string)$xml->floor);
-        $result->setDoorphone((string)$xml->doorphone);
-        $result->setStreet((string)$xml->street);
-        $result->setRegion((string)$xml->region);
+        $result->setHouse((string) $xml->house);
+        $result->setBuilding((string) $xml->building);
+        $result->setFlat((string) $xml->flat);
+        $result->setEntrance((string) $xml->entrance);
+        $result->setFloor((string) $xml->floor);
+        $result->setDoorphone((string) $xml->doorphone);
+        $result->setStreet((string) $xml->street);
+        $result->setRegion((string) $xml->region);
+
         return $result;
     }
 }

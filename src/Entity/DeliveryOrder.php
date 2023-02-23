@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryOrder
+class DeliveryOrder implements \JsonSerializable
 {
     // Не распарсенные переменные
     // private string $movedDeliveryId;
@@ -520,19 +520,19 @@ class DeliveryOrder
             $eid = (string) $attributes->eid;
         }
         $result->setEid($eid);
-        $result->setRevision((string)$xml->revision);
+        $result->setRevision((string) $xml->revision);
         $customerAttributes = $xml->customer->attributes();
         $result->setCustomerId((string) $customerAttributes->eid);
-        $result->setTerminalId((string)$xml->terminalId);
+        $result->setTerminalId((string) $xml->terminalId);
         $result->setDeliveryTerminal(DeliveryTerminal::fromXML($xml->deliveryTerminal));
-        $result->setSourceId((string)$xml->sourceId);
-        $result->setOrderId((string)$xml->orderId);
-        $result->setDeliveryStatus((string)$xml->deliveryStatus);
-        $result->setPhoneNumber((string)$xml->phoneNumber);
-        $result->setCustomerName((string)$xml->customerName);
-        $result->setEmailAddress((string)$xml->emailAddress);
-        $result->setComment((string)$xml->comment);
-        $result->setOrderSum((float)$xml->orderSum);
+        $result->setSourceId((string) $xml->sourceId);
+        $result->setOrderId((string) $xml->orderId);
+        $result->setDeliveryStatus((string) $xml->deliveryStatus);
+        $result->setPhoneNumber((string) $xml->phoneNumber);
+        $result->setCustomerName((string) $xml->customerName);
+        $result->setEmailAddress((string) $xml->emailAddress);
+        $result->setComment((string) $xml->comment);
+        $result->setOrderSum((float) $xml->orderSum);
         $result->setDeliveryDate(new \DateTime((string) $xml->deliveryDate));
         $result->setDeliveryCancelCause((string) $xml->deliveryCancelCause);
         $result->setDeliveryCancelComment((string) $xml->deliveryCancelComment);
@@ -541,7 +541,7 @@ class DeliveryOrder
         $result->setOrderType((string) $xml->orderType);
         $result->setIsSelfService(IikoResponse::parseBool($xml->isSelfService));
         $result->setIsCourierSelectedManually(IikoResponse::parseBool($xml->isCourierSelectedManually));
-        $result->setDeliveryOperator((string)$xml->deliveryOperator);
+        $result->setDeliveryOperator((string) $xml->deliveryOperator);
         $result->setCreatedTime(IikoResponse::parseTime($xml->createdTime));
         $result->setConfirmTime(IikoResponse::parseTime($xml->confirmTime));
         $result->setCookingFinishTime(IikoResponse::parseTime($xml->cookingFinishTime));
@@ -563,7 +563,8 @@ class DeliveryOrder
         $result->setAddress(DeliveryAddress::fromXML($xml->address));
         $result->setItems(DeliveryProductItems::fromXML($xml->items));
         $result->setPaymentItems(PaymentItems::fromXML($xml->paymentItems));
-        $result->setLastVerifiedDeliveryRestrictionsHash((string)$xml->lastVerifiedDeliveryRestrictionsHash);
+        $result->setLastVerifiedDeliveryRestrictionsHash((string) $xml->lastVerifiedDeliveryRestrictionsHash);
+
         return $result;
     }
 
@@ -575,5 +576,10 @@ class DeliveryOrder
     public function setCustomerId(string $customerId): void
     {
         $this->customerId = $customerId;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
     }
 }

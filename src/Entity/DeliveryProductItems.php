@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryProductItems implements \Iterator, \Countable
+class DeliveryProductItems implements \Iterator, \Countable, \JsonSerializable
 {
     /** @var DeliveryProductItem[] * */
     private $container = [];
@@ -61,10 +61,19 @@ class DeliveryProductItems implements \Iterator, \Countable
     public static function fromXML(\SimpleXMLElement $xml): DeliveryProductItems
     {
         $result = new DeliveryProductItems();
-    foreach($xml->i as $item){
-      $result->add(DeliveryProductItem::fromXML($item));
+        foreach ($xml->i as $item) {
+            $result->add(DeliveryProductItem::fromXML($item));
+        }
 
+        return $result;
     }
+
+    public function jsonSerialize(): mixed
+    {
+        $result = [];
+        foreach ($this->container as $item) {
+            $result[] = $item->jsonSerialize();
+        }
 
         return $result;
     }

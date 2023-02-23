@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryOrders implements \Countable, \Iterator
+class DeliveryOrders implements \Countable, \Iterator, \JsonSerializable
 {
     /** @var DeliveryOrder[] * */
     protected array $container = [];
@@ -17,6 +17,16 @@ class DeliveryOrders implements \Countable, \Iterator
             $this->container = $array;
         }
         $this->positon = 0;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        $result = [];
+        foreach ($this->container as $item) {
+            $result[] = $item->jsonSerialize();
+        }
+
+        return $result;
     }
 
     public function current(): mixed
@@ -69,13 +79,14 @@ class DeliveryOrders implements \Countable, \Iterator
             $item = DeliveryOrder::fromXML($deliveryOrder);
             $result->add($item);
         }
+
         return $result;
     }
 
     public static function fromIIKOResponse(IikoResponse $response): DeliveryOrders
     {
         $xml = $response->getReturnValue();
-        $result  = self::fromXML($xml);
+        $result = self::fromXML($xml);
 
         return $result;
     }

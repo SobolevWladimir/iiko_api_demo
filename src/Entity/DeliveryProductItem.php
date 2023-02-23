@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class DeliveryProductItem
+class DeliveryProductItem implements \JsonSerializable
 {
     // Не распарсенные переменные
     // lastModifyNode
@@ -125,7 +125,7 @@ class DeliveryProductItem
     public static function fromXML(\SimpleXMLElement $xml): DeliveryProductItem
     {
         $result = new DeliveryProductItem();
-        
+
         $result->setId((string) $xml->attributes()->eid);
         $result->setRevision((string) $xml->revision);
         $result->setAmount((float) $xml->amount);
@@ -133,8 +133,14 @@ class DeliveryProductItem
         $result->setPricePredefined((bool) $xml->pricePredefined);
         $result->setProduct((string) $xml->product);
         $result->setSum((float) $xml->sum);
-        $result->setDeleted($xml->deleted == "true");
+        $result->setDeleted($xml->deleted == 'true');
         $result->setStatus((string) $xml->status);
+
         return $result;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
     }
 }
