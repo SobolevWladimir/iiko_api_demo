@@ -564,7 +564,6 @@ class DeliveryOrder
         $result->setItems(DeliveryProductItems::fromXML($xml->items));
         $result->setPaymentItems(PaymentItems::fromXML($xml->paymentItems));
         $result->setLastVerifiedDeliveryRestrictionsHash((string)$xml->lastVerifiedDeliveryRestrictionsHash);
-
         return $result;
     }
 

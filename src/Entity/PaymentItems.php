@@ -62,7 +62,9 @@ class PaymentItems implements \Countable, \Iterator
     public static function fromXML(\SimpleXMLElement $xml): PaymentItems
     {
         $result = new PaymentItems();
-
+        foreach ($xml->i as $item) {
+            $result->add(PaymentItem::fromXML($item));
+        }
         return $result;
     }
 }

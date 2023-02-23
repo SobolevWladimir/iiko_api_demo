@@ -58,5 +58,6 @@ final class DeliveryRepositoryTest extends TestCase
         $this->assertSame(count($paymentItems), 1);
         $payItem = $paymentItems->at(0);
         $this->assertSame($payItem->getRevision(), '232338');
+        $this->assertSame($payItem->getSum(), 829.0);
     }
 }
