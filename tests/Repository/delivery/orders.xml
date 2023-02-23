@@ -4,7 +4,7 @@
     <customersLocalRevision>232338490499237</customersLocalRevision>
     <streetsLocalRevision>179941669976104</streetsLocalRevision>
     <customers>
-      <i eid="90685234-2e85-4db4-9fc2-4084bbf33673">
+      <i eid="90685234-2e85-4db4-9fc2-400000000073">
         <revision>232338</revision>
         <lastModifyNode null="1"></lastModifyNode>
         <deleted>false</deleted>
@@ -30,7 +30,7 @@
             <floor null="1"></floor>
             <doorphone null="1"></doorphone>
             <additionalInfo null="1"></additionalInfo>
-            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db92">
+            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db02">
               <revision>5900</revision>
               <lastModifyNode null="1"></lastModifyNode>
               <name>10-ый Парковый переулок</name>
@@ -79,12 +79,12 @@
     <streets></streets>
     <deliveryOrdersLoadingResponse>
       <deliveryOrders>
-        <i eid="23847f7f-51b5-4544-a38e-6f1f26b4f742">
+        <i eid="23847f7f-51b5-4544-a38e-600000000000">
           <revision>232338</revision>
           <lastModifyNode null="1"></lastModifyNode>
-          <customer eid="90685234-2e85-4db4-9fc2-4084bbf33673"></customer>
-          <terminalId>89394605-21f4-28b4-0182-a68e6a6cdf5d</terminalId>
-          <deliveryTerminal eid="89394605-21f4-28b4-0182-a68e6a6cdf5d">
+          <customer eid="90685234-2e85-4db4-9fc2-400000000073"></customer>
+          <terminalId>89394605-21f4-28b4-0182-a68e6a6cdf0d</terminalId>
+          <deliveryTerminal eid="89394605-21f4-28b4-0182-a68e6a6cdf0d">
             <revision>181977</revision>
             <lastModifyNode null="1"></lastModifyNode>
             <terminal>89394605-21f4-28b4-0182-a68e6a6cdf58</terminal>
@@ -134,7 +134,7 @@
             <floor null="1"></floor>
             <doorphone null="1"></doorphone>
             <additionalInfo null="1"></additionalInfo>
-            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db92"></street>
+            <street eid="b1f9425c-4a98-7f35-017e-0fa35082db02"></street>
             <region null="1"></region>
             <externalCartographyId null="1"></externalCartographyId>
             <index null="1"></index>

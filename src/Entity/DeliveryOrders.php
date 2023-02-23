@@ -69,15 +69,13 @@ class DeliveryOrders implements \Countable, \Iterator
             $item = DeliveryOrder::fromXML($deliveryOrder);
             $result->add($item);
         }
-
         return $result;
     }
 
     public static function fromIIKOResponse(IikoResponse $response): DeliveryOrders
     {
-        $result = new DeliveryOrders();
         $xml = $response->getReturnValue();
-        self::fromXML($xml);
+        $result  = self::fromXML($xml);
 
         return $result;
     }
