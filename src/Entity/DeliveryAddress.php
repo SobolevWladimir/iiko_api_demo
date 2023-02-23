@@ -14,6 +14,7 @@ class DeliveryAddress
     private ?string $doorphone;
     // private string $additionalInfo;
     private ?string $street;
+    private ?string $streetId;
     private ?string $region;
     // private ?string $externalCartographyId;
 
@@ -97,17 +98,17 @@ class DeliveryAddress
         $this->region = $region;
     }
 
-  public static function fromXml(\SimpleXMLElement $xml): DeliveryAddress
-  {
-      $result = new DeliveryAddress();
-      $result->setHouse((string)$xml->house);
-      $result->setBuilding((string)$xml->building);
-      $result->setFlat((string)$xml->flat);
-      $result->setEntrance((string)$xml->entrance);
-      $result->setFloor((string)$xml->floor);
-      $result->setDoorphone((string)$xml->doorphone);
-      $result->setStreet((string)$xml->street);
-      $result->setRegion((string)$xml->region);
-      return $result;
-  }
+    public static function fromXml(\SimpleXMLElement $xml): DeliveryAddress
+    {
+        $result = new DeliveryAddress();
+        $result->setHouse((string)$xml->house);
+        $result->setBuilding((string)$xml->building);
+        $result->setFlat((string)$xml->flat);
+        $result->setEntrance((string)$xml->entrance);
+        $result->setFloor((string)$xml->floor);
+        $result->setDoorphone((string)$xml->doorphone);
+        $result->setStreet((string)$xml->street);
+        $result->setRegion((string)$xml->region);
+        return $result;
+    }
 }

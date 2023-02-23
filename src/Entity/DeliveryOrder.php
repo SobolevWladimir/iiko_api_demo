@@ -80,12 +80,12 @@ class DeliveryOrder
     private PaymentItems $paymentItems; // array
     private string $lastVerifiedDeliveryRestrictionsHash;
 
-    public function getId(): string
+    public function getEid(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): void
+    public function setEid(string $id): void
     {
         $this->id = $id;
     }
@@ -537,7 +537,7 @@ class DeliveryOrder
         if ($attributes !== null && $attributes->eid !== null) {
             $eid = (string) $attributes->eid;
         }
-        $result->setId($eid);
+        $result->setEid($eid);
         $result->setRevision((string)$xml->revision);
         $customerAttributes = $xml->customer->attributes();
         $result->setCustomerId((string) $customerAttributes->eid);

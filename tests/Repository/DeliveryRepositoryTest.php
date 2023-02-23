@@ -35,11 +35,25 @@ final class DeliveryRepositoryTest extends TestCase
         $repository = new DeliveryRepository($client);
 
         $orders = $repository->getDeliveryOrders($user, $dateFrom, $dateTo);
+
         $this->assertSame(count($orders), 1);
         $order = $orders->at(0);
         $this->assertSame($order->getRevision(), '232338');
         $this->assertSame($order->getCustomerId(), '90685234-2e85-4db4-9fc2-400000000073');
         $this->assertSame($order->getTerminalId(), '89394605-21f4-28b4-0182-a68e6a6cdf0d');
         $this->assertSame($order->getDeliveryTerminal()->getEid(), '89394605-21f4-28b4-0182-a68e6a6cdf0d');
+        $this->assertSame($order->getDeliveryTerminal()->getName(), 'myTest: Основная группа');
+        $this->assertSame($order->getEid(), '23847f7f-51b5-4544-a38e-600000000000');
+        $this->assertSame($order->getOrderId(), '1cdde6e0-02fa-4efc-8d5f-9f60551fe80f');
+        $this->assertSame($order->getDeliveryStatus(), 'NEW');
+        $this->assertSame($order->getAddress()->getHouse(), '12');
+        $items = $order->getItems();
+        $this->assertSame(count($items), 2);
+        $item = $items->at(0);
+        $this->assertSame($item->getRevision(), '232338');
+        $paymentItems = $order->getPaymentItems();
+        $this->assertSame(count($paymentItems), 1);
+        $payItem = $paymentItems->at(0);
+        $this->assertSame($payItem->getRevision(), '232338');
     }
 }

@@ -119,7 +119,7 @@
           </deliveryTerminal>
           <sourceId null="1"></sourceId>
           <movedDeliveryId null="1"></movedDeliveryId>
-          <orderId>1cdde6e0-02fa-4efc-8d5f-9f60551fe8bf</orderId>
+          <orderId>1cdde6e0-02fa-4efc-8d5f-9f60551fe80f</orderId>
           <deliveryStatus>NEW</deliveryStatus>
           <phoneNumber>+79004053344</phoneNumber>
           <customerName>TestClient</customerName>
@@ -187,7 +187,7 @@
           <forceClosed>false</forceClosed>
           <items>
             <i eid="f129324f-700a-4fcf-96c8-dae04c1d1408">
-              <revision>232338</revision>
+              <revision />
               <lastModifyNode null="1"></lastModifyNode>
               <rank>0</rank>
               <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f702"></deliveryOrder>
@@ -199,7 +199,7 @@
               <splitted>false</splitted>
               <orderItemsAggregationId null="1"></orderItemsAggregationId>
               <mainPiece>true</mainPiece>
-              <product>c1a8fc71-7271-8744-0184-6f908dd99092</product>
+              <product>c1a8fc71-7271-8744-0184-6f908dd99002</product>
               <size null="1"></size>
               <sum>499.000000000</sum>
               <deleted>false</deleted>
