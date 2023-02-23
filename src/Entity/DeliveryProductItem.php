@@ -23,7 +23,7 @@ class DeliveryProductItem
     // modifiers
 
     private string $id;
-    private int $revision;
+    private string $revision;
     private float $amount;
     private float $price;
     private bool $pricePredefined;
@@ -42,12 +42,12 @@ class DeliveryProductItem
         $this->id = $id;
     }
 
-    public function getRevision(): int
+    public function getRevision(): string
     {
         return $this->revision;
     }
 
-    public function setRevision(int $revision): void
+    public function setRevision(string $revision): void
     {
         $this->revision = $revision;
     }
@@ -120,5 +120,21 @@ class DeliveryProductItem
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    public static function fromXML(\SimpleXMLElement $xml): DeliveryProductItem
+    {
+        $result = new DeliveryProductItem();
+        
+        $result->setId((string) $xml->attributes()->eid);
+        $result->setRevision((string) $xml->revision);
+        $result->setAmount((float) $xml->amount);
+        $result->setPrice((float) $xml->price);
+        $result->setPricePredefined((bool) $xml->pricePredefined);
+        $result->setProduct((string) $xml->product);
+        $result->setSum((float) $xml->sum);
+        $result->setDeleted($xml->deleted == "true");
+        $result->setStatus((string) $xml->status);
+        return $result;
     }
 }

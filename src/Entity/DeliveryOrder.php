@@ -510,24 +510,6 @@ class DeliveryOrder
         $this->lastVerifiedDeliveryRestrictionsHash = $lastVerifiedDeliveryRestrictionsHash;
     }
 
-    private static function parseTime(mixed $time): ?\DateTime
-    {
-        if ($time == null) {
-            return null;
-        }
-
-        return new \DateTime((string) $time);
-    }
-
-    private static function parseBool(mixed $value): bool
-    {
-        if ($value == null) {
-            return false;
-        }
-
-        return (string) $value == 'true';
-    }
-
     public static function fromXML(\SimpleXMLElement $xml): DeliveryOrder
     {
         $result = new DeliveryOrder();
@@ -557,27 +539,27 @@ class DeliveryOrder
         $result->setDeliveryNumber((string) $xml->deliveryNumber);
         $result->setLastModifyDeliveryNode((string) $xml->lastModifyDeliveryNode);
         $result->setOrderType((string) $xml->orderType);
-        $result->setIsSelfService(self::parseBool($xml->isSelfService));
-        $result->setIsCourierSelectedManually(self::parseBool($xml->isCourierSelectedManually));
+        $result->setIsSelfService(IikoResponse::parseBool($xml->isSelfService));
+        $result->setIsCourierSelectedManually(IikoResponse::parseBool($xml->isCourierSelectedManually));
         $result->setDeliveryOperator((string)$xml->deliveryOperator);
-        $result->setCreatedTime(self::parseTime($xml->createdTime));
-        $result->setConfirmTime(self::parseTime($xml->confirmTime));
-        $result->setCookingFinishTime(self::parseTime($xml->cookingFinishTime));
-        $result->setBillTime(self::parseTime($xml->billTime));
-        $result->setSendTime(self::parseTime($xml->sendTime));
-        $result->setActualTime(self::parseTime($xml->actualTime));
-        $result->setCloseTime(self::parseTime($xml->closeTime));
-        $result->setCancelTime(self::parseTime($xml->cancelTime));
-        $result->setForceCloseTime(self::parseTime($xml->forceCloseTime));
-        $lastModifyDate = self::parseTime($xml->lastModifyDate);
+        $result->setCreatedTime(IikoResponse::parseTime($xml->createdTime));
+        $result->setConfirmTime(IikoResponse::parseTime($xml->confirmTime));
+        $result->setCookingFinishTime(IikoResponse::parseTime($xml->cookingFinishTime));
+        $result->setBillTime(IikoResponse::parseTime($xml->billTime));
+        $result->setSendTime(IikoResponse::parseTime($xml->sendTime));
+        $result->setActualTime(IikoResponse::parseTime($xml->actualTime));
+        $result->setCloseTime(IikoResponse::parseTime($xml->closeTime));
+        $result->setCancelTime(IikoResponse::parseTime($xml->cancelTime));
+        $result->setForceCloseTime(IikoResponse::parseTime($xml->forceCloseTime));
+        $lastModifyDate = IikoResponse::parseTime($xml->lastModifyDate);
         $result->setLastModifyDate($lastModifyDate);
-        $result->setPredictedCookingCompleteTime(self::parseTime($xml->predictedCookingCompleteTime));
-        $result->setPredictedDeliveryTime(self::parseTime($xml->predictedDeliveryTime));
+        $result->setPredictedCookingCompleteTime(IikoResponse::parseTime($xml->predictedCookingCompleteTime));
+        $result->setPredictedDeliveryTime(IikoResponse::parseTime($xml->predictedDeliveryTime));
         $result->setDeliveryDurationInMinutes((int) $xml->deliveryDurationInMinutes);
         $result->setPersonsCount((int) $xml->personsCount);
-        $result->setSplitBetweenPersons(self::parseBool($xml->splitBetweenPersons));
-        $result->setIsCustomerAuthorizedInIikoBiz(self::parseBool($xml->isCustomerAuthorizedInIikoBiz));
-        $result->setForceClosed(self::parseBool($xml->forceClosed));
+        $result->setSplitBetweenPersons(IikoResponse::parseBool($xml->splitBetweenPersons));
+        $result->setIsCustomerAuthorizedInIikoBiz(IikoResponse::parseBool($xml->isCustomerAuthorizedInIikoBiz));
+        $result->setForceClosed(IikoResponse::parseBool($xml->forceClosed));
         $result->setAddress(DeliveryAddress::fromXML($xml->address));
         $result->setItems(DeliveryProductItems::fromXML($xml->items));
         $result->setPaymentItems(PaymentItems::fromXML($xml->paymentItems));

@@ -6,14 +6,14 @@ namespace App\Entity;
 
 class PaymentItem
 {
-    private string $id;
-    private int $revision;
     // lastModifyNode
     // deliveryOrder
     // paymentType;
     // additionalData
     // chequeAdditionalInfo
     // organizationDetailsInfo
+    private string $id;
+    private string $revision;
     private float $sum;
     private bool $isPrepay;
     private bool $isPreliminary;
@@ -31,12 +31,12 @@ class PaymentItem
         $this->id = $id;
     }
 
-    public function getRevision(): int
+    public function getRevision(): string
     {
         return $this->revision;
     }
 
-    public function setRevision(int $revision): void
+    public function setRevision(string $revision): void
     {
         $this->revision = $revision;
     }
@@ -99,5 +99,19 @@ class PaymentItem
     public function setIsFiscalizedExternally(bool $isFiscalizedExternally): void
     {
         $this->isFiscalizedExternally = $isFiscalizedExternally;
+    }
+
+    public static function fromXML(\SimpleXMLElement $xml): PaymentItem
+    {
+        $result = new PaymentItem();
+        $result->setId((string) $xml->attributes()->eid);
+        $result->setRevision((string) $xml->revision);
+        $result->setSum((float) $xml->sum);
+        $result->setIsPrepay(IikoResponse::parseBool($xml->isPrepay));
+        $result->setIsPrepay(IikoResponse::parseBool($xml->isPreliminary));
+        $result->setIsPrepay(IikoResponse::parseBool($xml->isExternal));
+        $result->setIsPrepay(IikoResponse::parseBool($xml->isProcessedExternally));
+        $result->setIsPrepay(IikoResponse::parseBool($xml->isFiscalizedExternally));
+        return $result;
     }
 }

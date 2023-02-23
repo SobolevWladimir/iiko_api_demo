@@ -61,6 +61,10 @@ class DeliveryProductItems implements \Iterator, \Countable
     public static function fromXML(\SimpleXMLElement $xml): DeliveryProductItems
     {
         $result = new DeliveryProductItems();
+    foreach($xml->i as $item){
+      $result->add(DeliveryProductItem::fromXML($item));
+
+    }
 
         return $result;
     }

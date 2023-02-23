@@ -50,7 +50,10 @@ final class DeliveryRepositoryTest extends TestCase
         $items = $order->getItems();
         $this->assertSame(count($items), 2);
         $item = $items->at(0);
+        $this->assertSame($item->getId(), 'f129324f-700a-4fcf-96c8-dae04c1d1408');
         $this->assertSame($item->getRevision(), '232338');
+        $this->assertSame($item->getAmount(), 1.0);
+        $this->assertSame($item->getSum(), 499.0);
         $paymentItems = $order->getPaymentItems();
         $this->assertSame(count($paymentItems), 1);
         $payItem = $paymentItems->at(0);

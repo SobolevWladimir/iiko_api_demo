@@ -187,7 +187,7 @@
           <forceClosed>false</forceClosed>
           <items>
             <i eid="f129324f-700a-4fcf-96c8-dae04c1d1408">
-              <revision />
+              <revision>232338</revision>
               <lastModifyNode null="1"></lastModifyNode>
               <rank>0</rank>
               <deliveryOrder cls="DeliveryOrder" eid="23847f7f-51b5-4544-a38e-6f1f26b4f702"></deliveryOrder>
@@ -206,7 +206,7 @@
               <comment null="1"></comment>
               <status>ADDED</status>
               <deletionMethod null="1"></deletionMethod>
-              <guestId>d6daec69-3e39-47c4-a128-8a04eb418203</guestId>
+              <guestId />
               <waiter>008c6c5a-e7bf-4475-8a20-57b363dd9401</waiter>
               <modifiers></modifiers>
             </i>

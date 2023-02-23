@@ -94,4 +94,22 @@ class IikoResponse implements \JsonSerializable
     {
         $this->licenseInfo = $licenseInfo;
     }
+
+    public static function parseTime(mixed $time): ?\DateTime
+    {
+        if ($time == null) {
+            return null;
+        }
+
+        return new \DateTime((string) $time);
+    }
+
+    public static function parseBool(mixed $value): bool
+    {
+        if ($value == null) {
+            return false;
+        }
+
+        return (string) $value == 'true';
+    }
 }
