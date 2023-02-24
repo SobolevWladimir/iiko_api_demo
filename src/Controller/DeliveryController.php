@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
@@ -39,6 +40,8 @@ class DeliveryController extends AbstractController
      *         @OA\Items(ref=@Model(type=DeliveryTerminal::class))
      *     )
      * )
+     *
+     * @Security(name="Bearer")
      */
     public function getTerminals(DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
@@ -52,14 +55,41 @@ class DeliveryController extends AbstractController
      *
      * @Route("/api/delivery/orders", methods={"GET"})
      *
+     * @OA\Parameter(
+     *     name="datefrom",
+     *     in="query",
+     *     description="Дата от в форматe: YYYY-MM-DD",
+     *     required=true,
+     *
+     *     @OA\Schema(type="string")
+     * )
+     *
+     * @OA\Parameter(
+     *     name="dateto",
+     *     in="query",
+     *     description="Дата до в форматe: YYYY-MM-DD",
+     *     required=true,
+     *
+     *     @OA\Schema(type="string")
+     * )
+     *
      * @OA\Response(
      *     response=200,
      *     description="Массив с именами файлов",
      * )
+     *
+     * @Security(name="Bearer")
      */
-    public function getDeliveryOrders(DeliveryRepository $repository, #[CurrentUser] User $user): Response
+    public function getDeliveryOrders(Request $request, DeliveryRepository $repository, #[CurrentUser] User $user): Response
     {
-        $result = $repository->getDeliveryOrders($user);
+        $dateFromStr = $request->query->get('datefrom');
+        $dateToStr = $request->query->get('dateto');
+        if ($dateFromStr === null || $dateToStr === null) {
+            return new JsonResponse('Необходимо указать datefrom и dateto', Response::HTTP_BAD_REQUEST);
+        }
+        $datefrom = new \DateTime($dateFromStr);
+        $dateto = new \DateTime($dateToStr);
+        $result = $repository->getDeliveryOrders($user, $datefrom, $dateto);
 
         return new JsonResponse($result);
     }

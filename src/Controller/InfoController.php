@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Security\User;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 /**
  * Class InfoController.
@@ -14,40 +17,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class InfoController
 {
     /**
-     * Получаем список файлов доступных для скачивания на сервере.
+     * Получаем список ссылок доступных для скачивания на сервере.
      *
-     * @Route("/api/info", methods={"GET"})
-     *
-     * @OA\Response(
-     *     response=200,
-     *     description="Массив с именами файлов",
-     * )
-     */
-    public function files(): JsonResponse
-    {
-        return new JsonResponse(['hello']);
-    }
-
-    /**
-     * Получить сылку на скачивания iikoOffice.
-     *
-     * @Route("/api/office", methods={"GET"})
-     *
-     * @OA\Response(
-     *     response=200,
-     *     description="Массив с именами файлов",
-     * )
+     * @Route("/api/info/links", methods={"GET"})
      *
      * @OA\Parameter(
-     *     name="host",
+     *     name="order",
      *     in="query",
-     *     description="host https://arseniy-cloud.iiko.it:443",
+     *     description="The field used to order rewards",
      *
      *     @OA\Schema(type="string")
      * )
+     *
+     * @OA\Response(
+     *     response=200,
+     *     description="массив с ссылками",
+     * )
+     *
+     * @Security(name="Bearer")
      */
-    public function office(): JsonResponse
+    public function links(#[CurrentUser] User $user): JsonResponse
     {
-        return new JsonResponse(['hello']);
+        $host = $user->getUrl();
+        $link = ['office' => "$host/update/BackOffice/Setup.RMS.BackOffice.exe"];
+
+        return new JsonResponse($link);
     }
 }

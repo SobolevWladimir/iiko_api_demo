@@ -33,9 +33,9 @@ final class InfoRepositoryTest extends TestCase
     /**
      * @depends testCheckServer
      */
-    public function checkServerInfo(User $user): void
+    public function testCheckServerInfo(User $user): void
     {
-        $str = (string) file_get_contents('./info/server_info.xml');
+        $str = (string) file_get_contents(__DIR__ . '/info/server_info.xml');
         $client = new MockHttpClient([
           new MockResponse($str, ['http_code' => 200]),
         ]);
@@ -43,7 +43,7 @@ final class InfoRepositoryTest extends TestCase
         $serverInfo = $repository->getServerInfo($user);
         $this->assertSame($serverInfo->getVersion(), '8.2.7014.0');
         $this->assertSame($serverInfo->getServerName(), 'myTest');
-        $this->assertSame($serverInfo->getEdition(), 'edition');
+        $this->assertSame($serverInfo->getEdition(), 'default');
         $this->assertSame($serverInfo->getComputerName(), 'arseniy-cloud-0.arseniy-cloud.clients.svc.cluster.local');
     }
 }
