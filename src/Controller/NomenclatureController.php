@@ -64,8 +64,8 @@ class NomenclatureController extends AbstractController
      */
     public function getTest(Request $request, NomenclatureRepository $repository, #[CurrentUser] User $user): Response
     {
-        $fromRevision = (string) $request->query->get('fromRevision');
-        $result = $repository->waitEntitiesUpdate($user, $fromRevision ?? '-1');
+        $fromRevision = $request->query->get('fromRevision');
+        $result = $repository->waitEntityesUpdate($user, $fromRevision ? (string) $fromRevision : '-1');
 
         $response = new Response($result);
 

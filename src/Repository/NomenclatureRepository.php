@@ -35,7 +35,7 @@ class NomenclatureRepository extends BaseRepository
         return $res;
     }
 
-    public function waitEntitiesUpdate(User $user, string $fromRevision): string
+    public function waitEntityesUpdate(User $user, string $fromRevision): string
     {
         $clientId = $this->generateNewClientId();
         $path = '/services/update?methodName=waitEntitiesUpdate';

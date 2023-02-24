@@ -8,8 +8,6 @@ class IikoResponse implements \JsonSerializable
 {
     private \SimpleXMLElement $returnValue;
 
-    private ?\SimpleXMLElement $entitiesUpdate;
-
     private string $success;
 
     private string $errorString;
@@ -31,7 +29,6 @@ class IikoResponse implements \JsonSerializable
         $result->setErrorString((string) $parse->errorString);
         $result->setResultStatus((string) $parse->resultStatus);
         $result->setLicenseInfo(LicenseInfo::fromXml($parse->licenseInfo));
-        $result->setEntitiesUpdate($parse->entitiesUpdate);
 
         return $result;
     }
@@ -40,12 +37,11 @@ class IikoResponse implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'returnValue'    => $this->getReturnValue(),
-            'entitiesUpdate' => $this->getEntitiesUpdate(),
-            'success'        => $this->getSuccess(),
-            'errorString'    => $this->getErrorString(),
-            'resultStatus'   => $this->getResultStatus(),
-            'licenseInfo'    => $this->getLicenseInfo(),
+            'returnValue'  => $this->getReturnValue(),
+            'success'      => $this->getSuccess(),
+            'errorString'  => $this->getErrorString(),
+            'resultStatus' => $this->getResultStatus(),
+            'licenseInfo'  => $this->getLicenseInfo(),
         ];
     }
 
@@ -115,15 +111,5 @@ class IikoResponse implements \JsonSerializable
         }
 
         return (string) $value == 'true';
-    }
-
-    public function getEntitiesUpdate(): \SimpleXMLElement
-    {
-        return $this->entitiesUpdate;
-    }
-
-    public function setEntitiesUpdate(\SimpleXMLElement $entitiesUpdate): void
-    {
-        $this->entitiesUpdate = $entitiesUpdate;
     }
 }
