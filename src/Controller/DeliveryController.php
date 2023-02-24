@@ -50,36 +50,36 @@ class DeliveryController extends AbstractController
         return new JsonResponse($result);
     }
 
-  /**
-   * Получить  список доставок.
-   *
-   * @Route("/api/delivery/orders", methods={"GET"})
-   *
-   * @OA\Parameter(
-   *     name="datefrom",
-   *     in="query",
-   *     description="Дата от в форматe: YYYY-MM-DD",
-   *     required=true,
-   *
-   *     @OA\Schema(type="string")
-   * )
-   *
-   * @OA\Parameter(
-   *     name="dateto",
-   *     in="query",
-   *     description="Дата до в форматe: YYYY-MM-DD",
-   *     required=true,
-   *
-   *     @OA\Schema(type="string")
-   * )
-   *
-   * @OA\Response(
-   *     response=200,
-   *     description="Массив с именами файлов",
-   * )
-   *
-   * @Security(name="Bearer")
-   */
+    /**
+     * Получить  список доставок.
+     *
+     * @Route("/api/delivery/orders", methods={"GET"})
+     *
+     * @OA\Parameter(
+     *     name="datefrom",
+     *     in="query",
+     *     description="Дата от в форматe: YYYY-MM-DD",
+     *     required=true,
+     *
+     *     @OA\Schema(type="string")
+     * )
+     *
+     * @OA\Parameter(
+     *     name="dateto",
+     *     in="query",
+     *     description="Дата до в форматe: YYYY-MM-DD",
+     *     required=true,
+     *
+     *     @OA\Schema(type="string")
+     * )
+     *
+     * @OA\Response(
+     *     response=200,
+     *     description="Массив с именами файлов",
+     * )
+     *
+     * @Security(name="Bearer")
+     */
     public function getDeliveryOrders(
         Request $request,
         DeliveryRepository $repository,
