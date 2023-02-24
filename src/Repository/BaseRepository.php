@@ -14,7 +14,7 @@ class BaseRepository
         return (string) Uuid::v4();
     }
 
-    public function getRequestBody(User $user, string $clientId): \SimpleXMLElement
+    public function getRequestBody(User $user, string $clientId, $useRawEntitys = true): \SimpleXMLElement
     {
         $xmlData = [
             'entities-version'                 => -1,
@@ -24,7 +24,7 @@ class BaseRepository
             'license-hash'                     => $user->getLicenseHash(),
             'restrictions-state-hash'          => $user->getStateHash(),
             'obtained-license-connections-ids' => '',
-            'use-raw-entities'                 => 'true',
+            'use-raw-entities'                 => $useRawEntitys ? 'true' : 'false',
             'revision'                         => '-1',
         ];
         $xml = new \SimpleXMLElement('<args/>');
