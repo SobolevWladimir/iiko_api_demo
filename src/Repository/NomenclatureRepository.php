@@ -34,4 +34,46 @@ class NomenclatureRepository extends BaseRepository
 
         return $res;
     }
+
+    public function waitEntityesUpdate(User $user, string $fromRevision): string
+    {
+        $clientId = $this->generateNewClientId();
+        $path = '/services/update?methodName=waitEntitiesUpdate';
+        $url = $user->getUrl() . $path;
+        $header = $this->getRequestHeader($user, $clientId);
+        $body = $this->getRequestBodyForUpdate($user, $clientId, $fromRevision);
+
+        $response = $this->client->request('POST', $url, [
+        'headers' => $header,
+        'body'    => $body->asXML(),
+        ]);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode != 200) {
+            throw new \Exception($response->getContent(), $statusCode);
+        }
+
+        return $response->getContent();
+    }
+
+    public function getRequestBodyForUpdate(User $user, string $clientId, string $revision = '-1'): \SimpleXMLElement
+    {
+        $xmlData = [
+            'entities-version'                 => $revision,
+            'client-type'                      => 'BACK',
+            'enable-warnings'                  => 'false',
+            'client-call-id'                   => $clientId,
+            'license-hash'                     => $user->getLicenseHash(),
+            'restrictions-state-hash'          => $user->getStateHash(),
+            'obtained-license-connections-ids' => '',
+            'use-raw-entities'                 => 'true',
+            'fromRevision'                     => $revision,
+            'timeoutMillis'                    => '0',
+        ];
+        $xml = new \SimpleXMLElement('<args/>');
+        foreach ($xmlData as $key => $value) {
+            $xml->addChild((string) $key, (string) $value);
+        }
+
+        return $xml;
+    }
 }

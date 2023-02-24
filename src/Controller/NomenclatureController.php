@@ -8,6 +8,7 @@ use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
@@ -38,5 +39,36 @@ class NomenclatureController extends AbstractController
         $result = $repository->getAll($user);
 
         return new JsonResponse($result);
+    }
+
+    /**
+     * waitEntitiesUpdate из iiko.
+     *
+     * @Route("/api/nomenclature/entitys", methods={"GET"})
+     *
+     * @OA\Parameter(
+     *     name="fromRevision",
+     *     in="query",
+     *     description="от какой ревизии получить данные",
+     *     required=true,
+     *
+     *     @OA\Schema(type="string")
+     * )
+     *
+     * @OA\Response(
+     *     response=200,
+     *     description="",
+     * )
+     *
+     * @Security(name="Bearer")
+     */
+    public function getTest(Request $request, NomenclatureRepository $repository, #[CurrentUser] User $user): Response
+    {
+        $fromRevision = $request->query->get('fromRevision');
+        $result = $repository->waitEntityesUpdate($user, $fromRevision ? (string) $fromRevision : '-1');
+
+        $response = new Response($result);
+
+        return $response;
     }
 }
