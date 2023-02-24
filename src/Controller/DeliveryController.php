@@ -88,9 +88,7 @@ class DeliveryController extends AbstractController
             return new JsonResponse('Необходимо указать datefrom и dateto', Response::HTTP_BAD_REQUEST);
         }
         $datefrom = new \DateTime($dateFromStr);
-        $datefrom->setTime(0, 0, 0);
         $dateto = new \DateTime($dateToStr);
-        $dateto->setTime(0, 0, 0);
         $result = $repository->getDeliveryOrders($user, $datefrom, $dateto);
 
         return new JsonResponse($result);
