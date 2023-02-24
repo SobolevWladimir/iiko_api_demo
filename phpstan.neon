@@ -5,6 +5,7 @@
 parameters:
   level: 8
   reportUnmatchedIgnoredErrors: false
+  checkGenericClassInNonGenericObjectType: false
   fileExtensions:
     - php
   scanDirectories:

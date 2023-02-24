@@ -8,19 +8,24 @@ class DeliveryProductItems implements \Iterator, \Countable, \JsonSerializable
 {
     /** @var DeliveryProductItem[] * */
     private $container = [];
-    private $positon = 0;
+    private int $position = 0;
 
-    public function __construct($array = null)
+    /**
+     * @param DeliveryProductItem[]|null $array
+     *
+     * @return void
+     */
+    public function __construct(array $array = null)
     {
         if (!is_null($array)) {
             $this->container = $array;
         }
-        $this->positon = 0;
+        $this->position = 0;
     }
 
     public function current(): mixed
     {
-        return $this->container[$this->positon];
+        return $this->container[$this->position];
     }
 
     public function next(): void
@@ -30,7 +35,7 @@ class DeliveryProductItems implements \Iterator, \Countable, \JsonSerializable
 
     public function key(): mixed
     {
-        return $this->positon;
+        return $this->position;
     }
 
     public function valid(): bool
@@ -40,7 +45,7 @@ class DeliveryProductItems implements \Iterator, \Countable, \JsonSerializable
 
     public function rewind(): void
     {
-        $this->positon = 0;
+        $this->position = 0;
     }
 
     public function count(): int
@@ -48,12 +53,12 @@ class DeliveryProductItems implements \Iterator, \Countable, \JsonSerializable
         return count($this->container);
     }
 
-    public function add(DeliveryProductItem $order)
+    public function add(DeliveryProductItem $order): void
     {
         $this->container[] = $order;
     }
 
-    public function at($index): DeliveryProductItem
+    public function at(int $index): DeliveryProductItem
     {
         return $this->container[$index];
     }

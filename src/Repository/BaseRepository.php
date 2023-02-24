@@ -14,7 +14,7 @@ class BaseRepository
         return (string) Uuid::v4();
     }
 
-    public function getRequestBody(User $user, string $clientId, $useRawEntitys = true): \SimpleXMLElement
+    public function getRequestBody(User $user, string $clientId, bool $useRawEntitys = true): \SimpleXMLElement
     {
         $xmlData = [
             'entities-version'                 => -1,

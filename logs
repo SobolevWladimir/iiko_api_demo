@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/wladimir/.local/bin/jedi-language-server", line 8, in <module>
+    sys.exit(cli())
+  File "/home/wladimir/.local/lib/python3.10/site-packages/jedi_language_server/cli.py", line 125, in cli
+    SERVER.start_io()
+  File "/home/wladimir/.local/lib/python3.10/site-packages/pygls/server.py", line 215, in start_io
+    self.shutdown()
+  File "/home/wladimir/.local/lib/python3.10/site-packages/pygls/server.py", line 185, in shutdown
+    self._thread_pool_executor.shutdown()
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 235, in shutdown
+    t.join()
+  File "/usr/lib/python3.10/threading.py", line 1096, in join
+    self._wait_for_tstate_lock()
+  File "/usr/lib/python3.10/threading.py", line 1116, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+KeyboardInterrupt

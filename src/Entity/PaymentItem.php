@@ -104,7 +104,7 @@ class PaymentItem implements \JsonSerializable
     public static function fromXML(\SimpleXMLElement $xml): PaymentItem
     {
         $result = new PaymentItem();
-        $result->setId((string) $xml->attributes()->eid);
+        $result->setId((string) $xml->attributes()?->eid);
         $result->setRevision((string) $xml->revision);
         $result->setSum((float) $xml->sum);
         $result->setIsPrepay(IikoResponse::parseBool($xml->isPrepay));
