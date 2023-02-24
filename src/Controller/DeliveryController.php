@@ -50,41 +50,44 @@ class DeliveryController extends AbstractController
         return new JsonResponse($result);
     }
 
-    /**
-     * Получить  список доставок.
-     *
-     * @Route("/api/delivery/orders", methods={"GET"})
-     *
-     * @OA\Parameter(
-     *     name="datefrom",
-     *     in="query",
-     *     description="Дата от в форматe: YYYY-MM-DD",
-     *     required=true,
-     *
-     *     @OA\Schema(type="string")
-     * )
-     *
-     * @OA\Parameter(
-     *     name="dateto",
-     *     in="query",
-     *     description="Дата до в форматe: YYYY-MM-DD",
-     *     required=true,
-     *
-     *     @OA\Schema(type="string")
-     * )
-     *
-     * @OA\Response(
-     *     response=200,
-     *     description="Массив с именами файлов",
-     * )
-     *
-     * @Security(name="Bearer")
-     */
-    public function getDeliveryOrders(Request $request, DeliveryRepository $repository, #[CurrentUser] User $user): Response
-    {
-        $dateFromStr = $request->query->get('datefrom');
-        $dateToStr = $request->query->get('dateto');
-        if ($dateFromStr === null || $dateToStr === null) {
+  /**
+   * Получить  список доставок.
+   *
+   * @Route("/api/delivery/orders", methods={"GET"})
+   *
+   * @OA\Parameter(
+   *     name="datefrom",
+   *     in="query",
+   *     description="Дата от в форматe: YYYY-MM-DD",
+   *     required=true,
+   *
+   *     @OA\Schema(type="string")
+   * )
+   *
+   * @OA\Parameter(
+   *     name="dateto",
+   *     in="query",
+   *     description="Дата до в форматe: YYYY-MM-DD",
+   *     required=true,
+   *
+   *     @OA\Schema(type="string")
+   * )
+   *
+   * @OA\Response(
+   *     response=200,
+   *     description="Массив с именами файлов",
+   * )
+   *
+   * @Security(name="Bearer")
+   */
+    public function getDeliveryOrders(
+        Request $request,
+        DeliveryRepository $repository,
+        #[CurrentUser] User $user
+    ): Response {
+        $dateFromStr = (string) $request->query->get('datefrom');
+        $dateToStr = (string) $request->query->get('dateto');
+        if ($dateFromStr === '' || $dateToStr === '') {
             return new JsonResponse('Необходимо указать datefrom и dateto', Response::HTTP_BAD_REQUEST);
         }
         $datefrom = new \DateTime($dateFromStr);

@@ -126,7 +126,7 @@ class DeliveryProductItem implements \JsonSerializable
     {
         $result = new DeliveryProductItem();
 
-        $result->setId((string) $xml->attributes()->eid);
+        $result->setId((string) $xml->attributes()?->eid);
         $result->setRevision((string) $xml->revision);
         $result->setAmount((float) $xml->amount);
         $result->setPrice((float) $xml->price);

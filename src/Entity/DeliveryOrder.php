@@ -522,7 +522,7 @@ class DeliveryOrder implements \JsonSerializable
         $result->setEid($eid);
         $result->setRevision((string) $xml->revision);
         $customerAttributes = $xml->customer->attributes();
-        $result->setCustomerId((string) $customerAttributes->eid);
+        $result->setCustomerId((string) $customerAttributes?->eid);
         $result->setTerminalId((string) $xml->terminalId);
         $result->setDeliveryTerminal(DeliveryTerminal::fromXML($xml->deliveryTerminal));
         $result->setSourceId((string) $xml->sourceId);
@@ -552,7 +552,7 @@ class DeliveryOrder implements \JsonSerializable
         $result->setCancelTime(IikoResponse::parseTime($xml->cancelTime));
         $result->setForceCloseTime(IikoResponse::parseTime($xml->forceCloseTime));
         $lastModifyDate = IikoResponse::parseTime($xml->lastModifyDate);
-        $result->setLastModifyDate($lastModifyDate);
+        $result->setLastModifyDate($lastModifyDate ?? new \DateTime());
         $result->setPredictedCookingCompleteTime(IikoResponse::parseTime($xml->predictedCookingCompleteTime));
         $result->setPredictedDeliveryTime(IikoResponse::parseTime($xml->predictedDeliveryTime));
         $result->setDeliveryDurationInMinutes((int) $xml->deliveryDurationInMinutes);

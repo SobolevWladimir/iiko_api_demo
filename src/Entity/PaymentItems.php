@@ -9,19 +9,24 @@ class PaymentItems implements \Countable, \Iterator, \JsonSerializable
     /** @var PaymentItem[] * */
     protected array $container = [];
 
-    private $positon = 0;
+    private int $position = 0;
 
-    public function __construct($array = null)
+    /**
+     * @param PaymentItem[]|null $array
+     *
+     * @return void
+     */
+    public function __construct(array $array = null)
     {
         if (!is_null($array)) {
             $this->container = $array;
         }
-        $this->positon = 0;
+        $this->position = 0;
     }
 
     public function current(): mixed
     {
-        return $this->container[$this->positon];
+        return $this->container[$this->position];
     }
 
     public function next(): void
@@ -31,7 +36,7 @@ class PaymentItems implements \Countable, \Iterator, \JsonSerializable
 
     public function key(): mixed
     {
-        return $this->positon;
+        return $this->position;
     }
 
     public function valid(): bool
@@ -41,7 +46,7 @@ class PaymentItems implements \Countable, \Iterator, \JsonSerializable
 
     public function rewind(): void
     {
-        $this->positon = 0;
+        $this->position = 0;
     }
 
     public function count(): int
@@ -49,12 +54,12 @@ class PaymentItems implements \Countable, \Iterator, \JsonSerializable
         return count($this->container);
     }
 
-    public function add(PaymentItem $order)
+    public function add(PaymentItem $order): void
     {
         $this->container[] = $order;
     }
 
-    public function at($index): PaymentItem
+    public function at(int $index): PaymentItem
     {
         return $this->container[$index];
     }
