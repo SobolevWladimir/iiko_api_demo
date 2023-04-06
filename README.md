@@ -2,6 +2,7 @@
 
     Пример работы с внутренним протоколом iiko
  
+[Статья](https://tproger.ru/articles/podklyuchaemsya-k-vnutrennemu-protokolu-iiko/)
 
 ### Цели проекта: 
 
